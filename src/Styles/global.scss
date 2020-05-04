@@ -1,0 +1,23 @@
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100%;
+    font-family: $primaryFont;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wrapper {
+    margin: 0 auto;
+    width: 1280px;
+    max-width: 90%;
+}
+
+// LINK Cleanup
+a {
+    text-decoration: none;
+    list-style: none;
+}
