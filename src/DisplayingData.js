@@ -28,6 +28,21 @@ class DisplayingData extends Component {
     })
   }
 
+  // axios call to Goodreads
+    axiosCall = (userQuery) => {
+    axios({
+      url: `https://www.goodreads.com/search.json`,
+      method: `GET`,
+      responseType: `json`,
+      params: {
+        key: `PPD00ZRT7jL7X8jXfJmmQ`,
+        // query: userQuery,
+      },
+    }).then((response) => {
+      console.log(response);
+    });
+  }
+y
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();

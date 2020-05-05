@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Header from './Landing'
-import DisplayingData from './DisplayingData'
+import Header from './Landing';
+import DisplayingData from './DisplayingData';
 
 
 class App extends Component {
