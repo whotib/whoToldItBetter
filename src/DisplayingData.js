@@ -11,7 +11,10 @@ class DisplayingData extends Component {
       Array: [],
       userInput: "",
       selected: "movie",
-      movieArray: [] 
+      movieArray: [],
+      listSelectTitle: "",
+      listSelectId: "",
+      selectedMovieInfo: {}
     }
   }
 
@@ -29,6 +32,23 @@ class DisplayingData extends Component {
       console.log(response.data.results)
       this.setState({
         movieArray: response.data.results
+      })
+    })
+  }
+
+  movieCallTwo = () => {
+    console.log(this.state.listSelectId)
+    axios({
+      url: `https://api.themoviedb.org/3/movie/${this.state.listSelectId}`,
+      method: `GET`,
+      responseType: `json`,
+      params: {
+        api_key: `4f70306aa4e939e1535c12686b6403c7`,
+      }
+    }).then((response) => {
+      console.log(response.data)
+      this.setState({
+        selectedMovieInfo: response.data
       })
     })
   }
@@ -59,7 +79,15 @@ class DisplayingData extends Component {
   };
 
   handleTitleOption = (event) => {
-    console.log(event)
+    console.log(event.target.value)
+    const selectedTitle = event.target.id
+    const selectedId = event.target.value
+    console.log(event.target.id)
+    this.setState({
+      listSelectTitle: selectedTitle,
+      listSelectId: selectedId
+    }, this.movieCallTwo )
+  
   }
 
 
@@ -109,23 +137,25 @@ class DisplayingData extends Component {
                     <li 
                       key={movie.id}  
                       onClick={this.handleTitleOption}
-                      value={movie.title}
+                      id={movie.title}
+                      value={movie.id} 
                     >
                       {movie.title}</li>
                     )
                   })
                 }
               </>
-              : <li>Hello</li>
+              : <li>Book query array goes here</li>
           }
           </ul>
         </div>
         
+        
         <ul>
           <li>
-            <h2>Movie</h2>
+            <h2>{this.state.selectedMovieInfo.title}</h2>
             <div>
-              <img src="" alt=""/>
+              <img src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`} alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`} />
             </div>
             <p>Winner?</p>
           </li>
