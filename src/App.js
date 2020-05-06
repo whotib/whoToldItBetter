@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.scss';
-import Header from './Landing'
+import Landing from './Landing'
 import DisplayingData from './DisplayingData'
+import {BrowserRouter as Router, Route, Link, NavLink, Switch,} from "react-router-dom";
 
 
 class App extends Component {
@@ -9,10 +10,14 @@ class App extends Component {
 
   render(){
     return (
-      <div className="App">
-        <Header/>
-        <DisplayingData/>
-      </div>
+         <Router>
+              <div className="App">
+                  {/* <Landing />   */}
+                   {/* <DisplayingData /> */}
+              <Route path="/data" component={DisplayingData} />
+              <Route exact path="/" component={Landing} />
+              </div>
+         </Router>
     );
   }
 }

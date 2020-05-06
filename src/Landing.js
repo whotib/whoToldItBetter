@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
+import { NavLink, Link } from "react-router-dom";
 
 
-
-class Header extends Component { 
+class Landing extends Component { 
 render(){
   return(
     <header>
       <h1> Who told it better?</h1>
       <div className="breakLine"></div>
       <p>The movie or the book?</p>
-      <button>continue</button>
+      <NavLink to="/data">
+        <button>continue</button>
+      </NavLink>
+      
     </header>
   )
 }
 
 }
 
-export default Header;
+export default Landing;

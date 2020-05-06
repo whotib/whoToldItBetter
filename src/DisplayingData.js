@@ -10,7 +10,7 @@ class DisplayingData extends Component {
     this.state = {
       Array: [],
       userInput: "",
-      bookInfo: []
+      bookInfo: [],
       selected: "movie",
       movieArray: [],
       listSelectTitle: "",
@@ -132,87 +132,90 @@ class DisplayingData extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Who Told It Better</h1>
-        <form onSubmit={this.handleFormSubmit}>
-          <label for="movie">Movie</label>
-          <input
-            type="radio"
-            checked={this.state.selected === "movie"}
-            name="mediaChoice"
-            value="movie"
-            id="movie"
-            className="radioButtons"
-            onChange={this.handleOptionChange} />
-          <label for="book">Book</label>
-          <input
-            type="radio"
-            checked={this.state.selected === "book"}
-            name="mediaChoice"
-            value="book"
-            id="book"
-            className="radioButtons"
-            onChange={this.handleOptionChange} />
-          <input
-            type="text"
-            value={this.state.userInput}
-            onChange={this.handleFormChange}
-            placeholder="Search"
-          />
-          <button type="submit" aria-label="Search"> Search </button>
-        </form>
-        
+         <div className="App">
+              <h1>Who Told It Better</h1>
+              <form onSubmit={this.handleFormSubmit}>
+                   <label htmlFor="movie">Movie</label>
+                   <input
+                        type="radio"
+                        checked={this.state.selected === "movie"}
+                        name="mediaChoice"
+                        value="movie"
+                        id="movie"
+                        className="radioButtons"
+                        onChange={this.handleOptionChange}
+                   />
+                   <label htmlFor="book">Book</label>
+                   <input
+                        type="radio"
+                        checked={this.state.selected === "book"}
+                        name="mediaChoice"
+                        value="book"
+                        id="book"
+                        className="radioButtons"
+                        onChange={this.handleOptionChange}
+                   />
+                   <input
+                        type="text"
+                        value={this.state.userInput}
+                        onChange={this.handleFormChange}
+                        placeholder="Search"
+                   />
+                   <button type="submit" aria-label="Search">
+                        {" "}
+                        Search{" "}
+                   </button>
+              </form>
 
+              {/* WORK IN PROGRESS */}
+              <div>
+                   <ul>
+                        {this.state.selected === "movie" ? (
+                             <>
+                                  {this.state.movieArray.map((movie) => {
+                                       return (
+                                            <li
+                                                 key={movie.id}
+                                                 onClick={
+                                                      this.handleTitleOption
+                                                 }
+                                                 id={movie.title}
+                                                 value={movie.id}
+                                            >
+                                                 {movie.title}
+                                            </li>
+                                       );
+                                  })}
+                             </>
+                        ) : (
+                             <li>Book query array goes here</li>
+                        )}
+                   </ul>
+              </div>
 
-        {/* WORK IN PROGRESS */}
-        <div>
-          <ul>
-          {
-            this.state.selected === "movie" ? 
-              <>
-                {
-                  this.state.movieArray.map((movie)=>{
-                    return(
-                    <li 
-                      key={movie.id}  
-                      onClick={this.handleTitleOption}
-                      id={movie.title}
-                      value={movie.id} 
-                    >
-                      {movie.title}</li>
-                    )
-                  })
-                }
-              </>
-              : <li>Book query array goes here</li>
-          }
-          </ul>
-        </div>
-        
-        
-        <ul>
-          <li>
-            <h2>{this.state.selectedMovieInfo.title}</h2>
-            <div>
-              <img src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`} alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`} />
-            </div>
-            <p>Winner?</p>
-          </li>
+              <ul>
+                   <li>
+                        <h2>{this.state.selectedMovieInfo.title}</h2>
+                        <div>
+                             <img
+                                  src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
+                                  alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
+                             />
+                        </div>
+                        <p>Winner?</p>
+                   </li>
 
-          <li>
-            <h2>Book</h2>
-            <div>
-              <img src="" alt="" />
-            </div>
-            <p>Loser?</p>
-          </li>
-        </ul>
+                   <li>
+                        <h2>Book</h2>
+                        <div>
+                             <img src="" alt="" />
+                        </div>
+                        <p>Loser?</p>
+                   </li>
+              </ul>
 
-
-        {/* WORK IN PROGRESS */}
-        
-
-      </div>
+              {/* WORK IN PROGRESS */}
+         </div>
     );
   }
 }
