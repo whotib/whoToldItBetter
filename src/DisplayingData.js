@@ -3,31 +3,24 @@ import axios from 'axios';
 import Qs from "qs";
 import convert from 'xml-js'
 
-// var xml =
-//   '<?xml version="1.0" encoding="utf-8"?>' +
-//   '<note importance="high" logged="true">' +
-//   "    <title>Happy</title>" +
-//   "    <todo>Work</todo>" +
-//   "    <todo>Play</todo>" +
-//   "</note>";
-// var result1 = convert.xml2json(xml, { compact: true, spaces: 4 });
-// var result2 = convert.xml2json(xml, { compact: false, spaces: 4 });
-// console.log(result1, "\n", result2);
 
 class DisplayingData extends Component {
-
   constructor() {
     super();
     this.state = {
-      anArray: [],
+      Array: [],
       userInput: "",
-      movieInfo: [],
       bookInfo: []
+      selected: "movie",
+      movieArray: [],
+      listSelectTitle: "",
+      listSelectId: "",
+      selectedMovieInfo: {}
     }
   }
 
   // axios call to TMDB
-  axiosMovieCall = (userQuery) => {
+  movieCall = (userQuery) => {
     axios({
       url: `https://api.themoviedb.org/3/search/movie`,
       method: `GET`,
@@ -37,9 +30,26 @@ class DisplayingData extends Component {
         query: userQuery
       }
     }).then((response) => {
-      console.log(response)
+      console.log(response.data.results)
       this.setState({
-        movieInfo: response.data.results
+        movieArray: response.data.results
+      })
+    })
+  }
+  
+  movieCallTwo = () => {
+    console.log(this.state.listSelectId)
+    axios({
+      url: `https://api.themoviedb.org/3/movie/${this.state.listSelectId}`,
+      method: `GET`,
+      responseType: `json`,
+      params: {
+        api_key: `4f70306aa4e939e1535c12686b6403c7`,
+      }
+    }).then((response) => {
+      console.log(response.data)
+      this.setState({
+        selectedMovieInfo: response.data
       })
     })
   }
@@ -84,12 +94,14 @@ class DisplayingData extends Component {
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.userInput)
-    if (this.state.userInput !== '') {
-      this.axiosMovieCall(this.state.userInput)
+    if (this.state.userInput !== '' && this.state.selected === "movie") {
+      this.movieCall(this.state.userInput)
+    } else if (this.state.userInput !== '' && this.state.selected === "book") {
+      //console.log("book API call!")
       this.axiosBookCall(this.state.userInput)
     }
   }
+
 
   // Grabs user input, which is then used by handleFormSubmit
   handleFormChange = (event) => {
@@ -98,11 +110,49 @@ class DisplayingData extends Component {
     })
   }
 
+
+  // Changes the state for the radio buttons in the form
+  handleOptionChange = changeEvent => {
+    this.setState({
+      selected: changeEvent.target.value
+    });
+  };
+
+  handleTitleOption = (event) => {
+    console.log(event.target.value)
+    const selectedTitle = event.target.id
+    const selectedId = event.target.value
+    console.log(event.target.id)
+    this.setState({
+      listSelectTitle: selectedTitle,
+      listSelectId: selectedId
+    }, this.movieCallTwo )
+  
+  }
+
   render() {
     return (
       <div className="App">
         <h1>Who Told It Better</h1>
         <form onSubmit={this.handleFormSubmit}>
+          <label for="movie">Movie</label>
+          <input
+            type="radio"
+            checked={this.state.selected === "movie"}
+            name="mediaChoice"
+            value="movie"
+            id="movie"
+            className="radioButtons"
+            onChange={this.handleOptionChange} />
+          <label for="book">Book</label>
+          <input
+            type="radio"
+            checked={this.state.selected === "book"}
+            name="mediaChoice"
+            value="book"
+            id="book"
+            className="radioButtons"
+            onChange={this.handleOptionChange} />
           <input
             type="text"
             value={this.state.userInput}
@@ -111,6 +161,57 @@ class DisplayingData extends Component {
           />
           <button type="submit" aria-label="Search"> Search </button>
         </form>
+        
+
+
+        {/* WORK IN PROGRESS */}
+        <div>
+          <ul>
+          {
+            this.state.selected === "movie" ? 
+              <>
+                {
+                  this.state.movieArray.map((movie)=>{
+                    return(
+                    <li 
+                      key={movie.id}  
+                      onClick={this.handleTitleOption}
+                      id={movie.title}
+                      value={movie.id} 
+                    >
+                      {movie.title}</li>
+                    )
+                  })
+                }
+              </>
+              : <li>Book query array goes here</li>
+          }
+          </ul>
+        </div>
+        
+        
+        <ul>
+          <li>
+            <h2>{this.state.selectedMovieInfo.title}</h2>
+            <div>
+              <img src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`} alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`} />
+            </div>
+            <p>Winner?</p>
+          </li>
+
+          <li>
+            <h2>Book</h2>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <p>Loser?</p>
+          </li>
+        </ul>
+
+
+        {/* WORK IN PROGRESS */}
+        
+
       </div>
     );
   }
