@@ -10,11 +10,12 @@ class DisplayingData extends Component {
     this.state = {
       Array: [],
       userInput: "",
-      bookInfo: [],
       selected: "movie",
       movieArray: [],
-      selectedMovieInfo: {}
-    }
+      selectedMovieInfo: {},
+      bookArray: [],
+      bookInfo: ''
+    };
   }
 
   // axios call to TMDB
@@ -25,15 +26,15 @@ class DisplayingData extends Component {
       responseType: `json`,
       params: {
         api_key: `4f70306aa4e939e1535c12686b6403c7`,
-        query: userQuery
-      }
+        query: userQuery,
+      },
     }).then((response) => {
       this.setState({
-        movieArray: response.data.results
-      })
-    })
-  }
-  
+        movieArray: response.data.results,
+      });
+    });
+  };
+
   movieCallTwo = (id) => {
     axios({
       url: `https://api.themoviedb.org/3/movie/${id}`,
@@ -41,13 +42,13 @@ class DisplayingData extends Component {
       responseType: `json`,
       params: {
         api_key: `4f70306aa4e939e1535c12686b6403c7`,
-      }
+      },
     }).then((response) => {
       this.setState({
-        selectedMovieInfo: response.data
-      })
-    })
-  }
+        selectedMovieInfo: response.data,
+      });
+    });
+  };
 
   // axios call to Goodreads
   axiosBookCall = (userQ) => {
@@ -69,61 +70,69 @@ class DisplayingData extends Component {
     })
       .then((res) => {
         // console.log(res)
-        const toJson = JSON.parse(convert.xml2json(res.data, {compact: true,spaces: 4,}));
+        const toJson = JSON.parse(
+          convert.xml2json(res.data, { compact: true, spaces: 4 })
+        );
         // console.log(toJson.GoodreadsResponse)
-        console.log(toJson.GoodreadsResponse.search.results.work[0].best_book.title)
+        console.log(
+          toJson.GoodreadsResponse.search.results.work[0].best_book.title
+        );
         const booksResult = toJson.GoodreadsResponse.search.results.work;
         // console.log(booksResult);
-        booksResult.map((book)=>{
-          // console.log(book)
-          console.log("title",book.best_book.title._text)
-          console.log("image",book.best_book.image_url._text);
-          console.log("publication year", book.original_publication_year._text)
-          console.log("rating", book.average_rating._text)
-        })
-
+        return this.setState({
+          bookArray: booksResult,
+        });
       })
       .catch((res) => {
-        console.log(res);
+        console.log("no book response");
       });
-  }
+  };
 
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();
-    if (this.state.userInput !== '' && this.state.selected === "movie") {
-      this.movieCall(this.state.userInput)
-    } else if (this.state.userInput !== '' && this.state.selected === "book") {
-      this.axiosBookCall(this.state.userInput)
+    if (this.state.userInput !== "" && this.state.selected === "movie") {
+      this.movieCall(this.state.userInput);
+    } else if (this.state.userInput !== "" && this.state.selected === "book") {
+      this.axiosBookCall(this.state.userInput);
     }
-  }
-
+  };
 
   // Grabs user input, which is then used by handleFormSubmit
   handleFormChange = (event) => {
     this.setState({
-      userInput: event.target.value
-    })
-  }
-
+      userInput: event.target.value,
+    });
+  };
 
   // Changes the state for the radio buttons in the form
-  handleOptionChange = changeEvent => {
+  handleOptionChange = (changeEvent) => {
     this.setState({
-      selected: changeEvent.target.value
+      selected: changeEvent.target.value,
     });
   };
 
   handleTitleOption = (event) => {
-    const selectedTitle = event.target.id
-    const selectedId = event.target.value
-    this.secondCall(selectedTitle, selectedId)
+    const selectedTitle = event.target.id;
+    const selectedId = event.target.value;
+    this.secondCall(selectedTitle, selectedId);
+  };
+  handleTitleBookOption =(event) => {
+    this.setState({
+      bookInfo: event.target.attributes[0].title
+      // {title: event.target.attributes[0].data-title,
+      // ratings: event.target.attributes[2].data-rating,
+      // image: event.target.attributes[1].data-image
+      // }
+    },
+    )
+    // this.movieCall(event.target.id);
   }
 
   secondCall = (title, id) => {
     this.movieCallTwo(id);
-    this.axiosBookCall(title)
-  }
+    this.axiosBookCall(title);
+  };
 
   render() {
     return (
@@ -167,14 +176,12 @@ class DisplayingData extends Component {
           <ul>
             {this.state.selected === "movie" ? (
               <>
-              {/* {this.state.movieArray.slice([0],[4])} */}
+                {/* {this.state.movieArray.slice([0],[4])} */}
                 {this.state.movieArray.slice([0], [5]).map((movie) => {
                   return (
                     <li
                       key={movie.id}
-                      onClick={
-                          this.handleTitleOption
-                      }
+                      onClick={this.handleTitleOption}
                       id={movie.title}
                       value={movie.id}
                     >
@@ -182,9 +189,54 @@ class DisplayingData extends Component {
                     </li>
                   );
                 })}
+                ;
+                {this.state.bookArray.slice([0], [5]).map((book) => {
+                  return (
+                    <li key={book.id._text}>
+                      <button
+                        onClick={this.handleTitleBookOption}
+                        datatitle={book.best_book.title._text}
+                        data-value={book.best_book.title.text}
+                        data-image={book.best_book.image_url._text}
+                        data-rating={book.average_rating._text}
+                      >
+                        {book.best_book.title._text}
+                      </button>
+                    </li>
+                  );
+                })}
               </>
             ) : (
-              <li>Book query array goes here</li>
+              <>
+                {this.state.bookArray.slice([0], [5]).map((book) => {
+                  return (
+                    <li key={book.id._text}>
+                      <button
+                        onClick={this.handleTitleBookOption}
+                        datatitle={book.best_book.title._text}
+                        data-value={book.best_book.title.text}
+                        data-image={book.best_book.image_url._text}
+                        data-rating={book.average_rating._text}
+                      >
+                        {book.best_book.title._text}
+                      </button>
+                    </li>
+                  );
+                })}
+                {this.state.movieArray.slice([0], [5]).map((movie) => {
+                  return (
+                    <li
+                      key={movie.id}
+                      onClick={this.handleTitleOption}
+                      id={movie.title}
+                      value={movie.id}
+                    >
+                      {movie.title}
+                    </li>
+                  );
+                })}
+                ;
+              </>
             )}
           </ul>
         </div>
@@ -194,17 +246,20 @@ class DisplayingData extends Component {
             <h2>{this.state.selectedMovieInfo.title}</h2>
             <div>
               <img
-                  src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
-                  alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
+                src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
+                alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
               />
             </div>
             <p>Winner?</p>
           </li>
-          
+
           <li>
-            <h2>Book</h2>
+              <h2>{this.state.bookInfo}</h2>
             <div>
-              <img src="" alt="" />
+              {/* <img
+                src={this.state.bookArray.best_book.image_url._text}
+                alt={`Book cover for ${this.state.bookArray.best_book.title._text}`} */}
+              {/* /> */}
             </div>
             <p>Loser?</p>
           </li>
