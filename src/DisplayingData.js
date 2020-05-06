@@ -94,7 +94,6 @@ class DisplayingData extends Component {
     if (this.state.userInput !== '' && this.state.selected === "movie") {
       this.movieCall(this.state.userInput)
     } else if (this.state.userInput !== '' && this.state.selected === "book") {
-      //console.log("book API call!")
       this.axiosBookCall(this.state.userInput)
     }
   }
@@ -116,11 +115,8 @@ class DisplayingData extends Component {
   };
 
   handleTitleOption = (event) => {
-    console.log(event.target.value)
     const selectedTitle = event.target.id
     const selectedId = event.target.value
-    console.log(event.target.id)
-
     this.secondCall(selectedTitle, selectedId)
   }
 
