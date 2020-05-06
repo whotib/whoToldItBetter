@@ -13,10 +13,7 @@ class DisplayingData extends Component {
       bookInfo: [],
       selected: "movie",
       movieArray: [],
-      listSelectTitle: "",
-      listSelectId: "",
-      selectedMovieInfo: {},
-      q:""
+      selectedMovieInfo: {}
     }
   }
 
@@ -31,24 +28,21 @@ class DisplayingData extends Component {
         query: userQuery
       }
     }).then((response) => {
-      console.log(response.data.results)
       this.setState({
         movieArray: response.data.results
       })
     })
   }
   
-  movieCallTwo = () => {
-    console.log(this.state.listSelectId)
+  movieCallTwo = (id) => {
     axios({
-      url: `https://api.themoviedb.org/3/movie/${this.state.listSelectId}`,
+      url: `https://api.themoviedb.org/3/movie/${id}`,
       method: `GET`,
       responseType: `json`,
       params: {
         api_key: `4f70306aa4e939e1535c12686b6403c7`,
       }
     }).then((response) => {
-      console.log(response.data)
       this.setState({
         selectedMovieInfo: response.data
       })
@@ -57,7 +51,7 @@ class DisplayingData extends Component {
 
   // axios call to Goodreads
   axiosBookCall = (userQ) => {
-    console.log(this.state.listSelectTitle)
+    console.log(userQ)
     axios({
       method: "GET",
       url: "http://proxy.hackeryou.com",
@@ -127,103 +121,100 @@ class DisplayingData extends Component {
     const selectedTitle = event.target.id
     const selectedId = event.target.value
     console.log(event.target.id)
-    this.setState({
-      listSelectTitle: selectedTitle,
-      q: selectedTitle,
-      listSelectId: selectedId
-    }, this.movieCallTwo, this.axiosBookCall(this.state.listSelectTitle) )
-  
+    this.secondCall(selectedTitle, selectedId)
+  }
+
+  secondCall = (title, id) => {
+    this.movieCallTwo(id);
+    this.axiosBookCall(title)
   }
 
   render() {
     return (
-         <div className="App">
-              <h1>Who Told It Better</h1>
-              <form onSubmit={this.handleFormSubmit}>
-                   <label htmlFor="movie">Movie</label>
-                   <input
-                        type="radio"
-                        checked={this.state.selected === "movie"}
-                        name="mediaChoice"
-                        value="movie"
-                        id="movie"
-                        className="radioButtons"
-                        onChange={this.handleOptionChange}
-                   />
-                   <label htmlFor="book">Book</label>
-                   <input
-                        type="radio"
-                        checked={this.state.selected === "book"}
-                        name="mediaChoice"
-                        value="book"
-                        id="book"
-                        className="radioButtons"
-                        onChange={this.handleOptionChange}
-                   />
-                   <input
-                        type="text"
-                        value={this.state.userInput}
-                        onChange={this.handleFormChange}
-                        placeholder="Search"
-                   />
-                   <button type="submit" aria-label="Search">
-                        {" "}
-                        Search{" "}
-                   </button>
-              </form>
+      <div className="App">
+        <h1>Who Told It Better</h1>
+        <form onSubmit={this.handleFormSubmit}>
+          <label htmlFor="movie">Movie</label>
+          <input
+            type="radio"
+            checked={this.state.selected === "movie"}
+            name="mediaChoice"
+            value="movie"
+            id="movie"
+            className="radioButtons"
+            onChange={this.handleOptionChange}
+          />
+          <label htmlFor="book">Book</label>
+          <input
+            type="radio"
+            checked={this.state.selected === "book"}
+            name="mediaChoice"
+            value="book"
+            id="book"
+            className="radioButtons"
+            onChange={this.handleOptionChange}
+          />
+          <input
+            type="text"
+            value={this.state.userInput}
+            onChange={this.handleFormChange}
+            placeholder="Search"
+          />
+          <button type="submit" aria-label="Search">
+            {" "}
+            Search{" "}
+          </button>
+        </form>
 
-              {/* WORK IN PROGRESS */}
-              <div>
-                   <ul>
-                        {this.state.selected === "movie" ? (
+        {/* WORK IN PROGRESS */}
+        <div>
+          <ul>
+            {this.state.selected === "movie" ? (
+              <>
+              {/* {this.state.movieArray.slice([0],[4])} */}
+                {this.state.movieArray.slice([0], [5]).map((movie) => {
+                  return (
+                    <li
+                      key={movie.id}
+                      onClick={
+                          this.handleTitleOption
+                      }
+                      id={movie.title}
+                      value={movie.id}
+                    >
+                      {movie.title}
+                    </li>
+                  );
+                })}
+              </>
+            ) : (
+              <li>Book query array goes here</li>
+            )}
+          </ul>
+        </div>
 
-                             <>
-                              {/* {this.state.movieArray.slice([0],[4])} */}
-
-                                    {this.state.movieArray.slice([0], [5]).map((movie) => {
-                                       return (
-                                            <li
-                                                 key={movie.id}
-                                                 onClick={
-                                                      this.handleTitleOption
-                                                 }
-                                                 id={movie.title}
-                                                 value={movie.id}
-                                            >
-                                                 {movie.title}
-                                            </li>
-                                       );
-                                  })}
-                             </>
-                        ) : (
-                             <li>Book query array goes here</li>
-                        )}
-                   </ul>
-              </div>
-
-              <ul>
-                   <li>
-                        <h2>{this.state.selectedMovieInfo.title}</h2>
-                        <div>
-                             <img
-                                  src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
-                                  alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
-                             />
-                        </div>
-                        <p>Winner?</p>
-                   </li>
-
-                   <li>
-                        <h2>Book</h2>
-                        <div>
-                             <img src="" alt="" />
-                        </div>
-                        <p>Loser?</p>
-                   </li>
-              </ul>
-
-              {/* WORK IN PROGRESS */}
-         </div>
+        <ul>
+          <li>
+            <h2>{this.state.selectedMovieInfo.title}</h2>
+            <div>
+              <img
+                  src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
+                  alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
+              />
+            </div>
+            <p>Winner?</p>
+          </li>
+          
+          <li>
+            <h2>Book</h2>
+            <div>
+              <img src="" alt="" />
+            </div>
+            <p>Loser?</p>
+          </li>
+        </ul>
+        {/* WORK IN PROGRESS */}
+      </div>
     );
   }
 }
