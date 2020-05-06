@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/whoToldItBetter/static/css/main.0391848f.chunk.css",
+    "main.js": "/whoToldItBetter/static/js/main.9721599f.chunk.js",
+    "main.js.map": "/whoToldItBetter/static/js/main.9721599f.chunk.js.map",
+    "runtime-main.js": "/whoToldItBetter/static/js/runtime-main.8150cbcc.js",
+    "runtime-main.js.map": "/whoToldItBetter/static/js/runtime-main.8150cbcc.js.map",
+    "static/js/2.b1180c65.chunk.js": "/whoToldItBetter/static/js/2.b1180c65.chunk.js",
+    "static/js/2.b1180c65.chunk.js.map": "/whoToldItBetter/static/js/2.b1180c65.chunk.js.map",
+    "index.html": "/whoToldItBetter/index.html",
+    "precache-manifest.7fe468da3ae1deb3fed233fdfc53b071.js": "/whoToldItBetter/precache-manifest.7fe468da3ae1deb3fed233fdfc53b071.js",
+    "service-worker.js": "/whoToldItBetter/service-worker.js",
+    "static/css/main.0391848f.chunk.css.map": "/whoToldItBetter/static/css/main.0391848f.chunk.css.map",
+    "static/js/2.b1180c65.chunk.js.LICENSE.txt": "/whoToldItBetter/static/js/2.b1180c65.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8150cbcc.js",
+    "static/js/2.b1180c65.chunk.js",
+    "static/css/main.0391848f.chunk.css",
+    "static/js/main.9721599f.chunk.js"
+  ]
+}
