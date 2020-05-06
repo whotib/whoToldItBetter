@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import Qs from "qs";
+import convert from 'xml-js'
 
 
 class DisplayingData extends Component {
-
   constructor() {
     super();
     this.state = {
       Array: [],
       userInput: "",
+      bookInfo: []
       selected: "movie",
       movieArray: [],
       listSelectTitle: "",
@@ -35,7 +36,7 @@ class DisplayingData extends Component {
       })
     })
   }
-
+  
   movieCallTwo = () => {
     console.log(this.state.listSelectId)
     axios({
@@ -53,13 +54,51 @@ class DisplayingData extends Component {
     })
   }
 
+  // axios call to Goodreads
+  axiosBookCall = (userQ) => {
+    axios({
+      method: "GET",
+      url: "http://proxy.hackeryou.com",
+      dataType: "json",
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, { arrayFormat: "brackets" });
+      },
+      params: {
+        reqUrl: `https://www.goodreads.com/search.xml`,
+        params: {
+          key: `PPD00ZRT7jL7X8jXfJmmQ`,
+          q: userQ,
+        },
+      },
+      xmlToJSON: true,
+    })
+      .then((res) => {
+        const toJson = JSON.parse(convert.xml2json(res.data, {compact: true,spaces: 4,}));
+        // console.log(toJson.GoodreadsResponse.search.results.work[0].best_book.title)
+        const booksResult = toJson.GoodreadsResponse.search.results.work;
+
+        booksResult.map((book)=>{
+          // console.log(book)
+          console.log("title",book.best_book.title._text)
+          console.log("image",book.best_book.image_url._text);
+          console.log("publication year", book.original_publication_year._text)
+          console.log("rating", book.average_rating._text)
+        })
+
+      })
+      .catch((res) => {
+        console.log(res);
+      });
+  }
+
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();
     if (this.state.userInput !== '' && this.state.selected === "movie") {
       this.movieCall(this.state.userInput)
     } else if (this.state.userInput !== '' && this.state.selected === "book") {
-      console.log("book API call!")
+      //console.log("book API call!")
+      this.axiosBookCall(this.state.userInput)
     }
   }
 
@@ -70,6 +109,7 @@ class DisplayingData extends Component {
       userInput: event.target.value
     })
   }
+
 
   // Changes the state for the radio buttons in the form
   handleOptionChange = changeEvent => {
@@ -89,7 +129,6 @@ class DisplayingData extends Component {
     }, this.movieCallTwo )
   
   }
-
 
   render() {
     return (
@@ -179,3 +218,4 @@ class DisplayingData extends Component {
 }
 
 export default DisplayingData;
+
