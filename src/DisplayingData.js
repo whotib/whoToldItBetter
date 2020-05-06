@@ -14,7 +14,9 @@ class DisplayingData extends Component {
       movieArray: [],
       selectedMovieInfo: {},
       bookArray: [],
-      bookInfo: {}
+      bookInfo: {},
+      movieInfo: {}
+
     };
   }
 
@@ -29,6 +31,7 @@ class DisplayingData extends Component {
         query: userQuery,
       },
     }).then((response) => {
+      console.log(response.data.results)
       this.setState({
         movieArray: response.data.results,
       });
@@ -85,10 +88,11 @@ class DisplayingData extends Component {
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();
-    if (this.state.userInput !== "" && this.state.selected === "movie") {
+    if (this.state.userInput !== "") {
       this.movieCall(this.state.userInput);
-    } else if (this.state.userInput !== "" && this.state.selected === "book") {
       this.axiosBookCall(this.state.userInput);
+    } else {
+      console.log('This didnt work')
     }
   };
 
@@ -99,15 +103,17 @@ class DisplayingData extends Component {
     });
   };
 
-  // Changes the state for the radio buttons in the form
-  handleOptionChange = (changeEvent) => {
-    this.setState({
-      selected: changeEvent.target.value,
-    });
-  };
-
   handleTitleOption = (event) => {
-    const selectedTitle = event.target.id;
+    console.log(event.target.attributes)
+    this.setState({
+      movieInfo: {
+        title: event.target.attributes[0].value,
+        id: event.target.attributes[1].value,
+        image: event.target.attributes[2].value,
+        rating: event.target.attributes[3].value
+      }
+    })
+    const selectedTitle = event.target.attributes[0].value;
     const selectedId = event.target.value;
     this.secondCall(selectedTitle, selectedId);
   };
@@ -124,7 +130,6 @@ class DisplayingData extends Component {
 
   secondCall = (title, id) => {
     this.movieCallTwo(id);
-    this.axiosBookCall(title);
   };
 
   render() {
@@ -132,26 +137,6 @@ class DisplayingData extends Component {
       <div className="App">
         <h1>Who Told It Better</h1>
         <form onSubmit={this.handleFormSubmit}>
-          <label htmlFor="movie">Movie</label>
-          <input
-            type="radio"
-            checked={this.state.selected === "movie"}
-            name="mediaChoice"
-            value="movie"
-            id="movie"
-            className="radioButtons"
-            onChange={this.handleOptionChange}
-          />
-          <label htmlFor="book">Book</label>
-          <input
-            type="radio"
-            checked={this.state.selected === "book"}
-            name="mediaChoice"
-            value="book"
-            id="book"
-            className="radioButtons"
-            onChange={this.handleOptionChange}
-          />
           <input
             type="text"
             value={this.state.userInput}
@@ -174,11 +159,11 @@ class DisplayingData extends Component {
                     <li
                       key={movie.id}
                       onClick={this.handleTitleOption}
-                      id={movie.title}
                       value={movie.id}
                       data-title={movie.title}
                       data-id={movie.id}
                       data-poster={movie.poster_path}
+                      data-rating={movie.vote_average}
                     >
                       {movie.title}
                     </li>
@@ -208,7 +193,7 @@ class DisplayingData extends Component {
                     <li key={book.id._text}>
                       <button
                         onClick={this.handleTitleBookOption}
-                        datatitle={book.best_book.title._text}
+                        data-title={book.best_book.title._text}
                         data-value={book.best_book.title.text}
                         data-image={book.best_book.image_url._text}
                         data-rating={book.average_rating._text}
