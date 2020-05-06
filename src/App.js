@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.scss';
 import Landing from './Landing'
 import DisplayingData from './DisplayingData'
-import {BrowserRouter as Router, Route, Link, NavLink, Switch,} from "react-router-dom";
+import {BrowserRouter as Router, Route } from "react-router-dom";
 
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
 
   render(){
     return (
-         <Router>
+         <Router basename={process.env.PUBLIC_URL}>
               <div className="App">
                   {/* <Landing />   */}
                    {/* <DisplayingData /> */}
