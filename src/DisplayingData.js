@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Qs from "qs";
+import convert from 'xml-js'
 
-
+// var xml =
+//   '<?xml version="1.0" encoding="utf-8"?>' +
+//   '<note importance="high" logged="true">' +
+//   "    <title>Happy</title>" +
+//   "    <todo>Work</todo>" +
+//   "    <todo>Play</todo>" +
+//   "</note>";
+// var result1 = convert.xml2json(xml, { compact: true, spaces: 4 });
+// var result2 = convert.xml2json(xml, { compact: false, spaces: 4 });
+// console.log(result1, "\n", result2);
 
 class DisplayingData extends Component {
 
@@ -10,11 +21,13 @@ class DisplayingData extends Component {
     this.state = {
       anArray: [],
       userInput: "",
+      movieInfo: [],
+      bookInfo: []
     }
   }
 
   // axios call to TMDB
-  axiosCall = (userQuery) => {
+  axiosMovieCall = (userQuery) => {
     axios({
       url: `https://api.themoviedb.org/3/search/movie`,
       method: `GET`,
@@ -25,7 +38,47 @@ class DisplayingData extends Component {
       }
     }).then((response) => {
       console.log(response)
+      this.setState({
+        movieInfo: response.data.results
+      })
     })
+  }
+
+  // axios call to Goodreads
+  axiosBookCall = (userQ) => {
+    axios({
+      method: "GET",
+      url: "http://proxy.hackeryou.com",
+      dataType: "json",
+      paramsSerializer: function (params) {
+        return Qs.stringify(params, { arrayFormat: "brackets" });
+      },
+      params: {
+        reqUrl: `https://www.goodreads.com/search.xml`,
+        params: {
+          key: `PPD00ZRT7jL7X8jXfJmmQ`,
+          q: userQ,
+        },
+      },
+      xmlToJSON: true,
+    })
+      .then((res) => {
+        const toJson = JSON.parse(convert.xml2json(res.data, {compact: true,spaces: 4,}));
+        // console.log(toJson.GoodreadsResponse.search.results.work[0].best_book.title)
+        const booksResult = toJson.GoodreadsResponse.search.results.work;
+
+        booksResult.map((book)=>{
+          // console.log(book)
+          console.log("title",book.best_book.title._text)
+          console.log("image",book.best_book.image_url._text);
+          console.log("publication year", book.original_publication_year._text)
+          console.log("rating", book.average_rating._text)
+        })
+
+      })
+      .catch((res) => {
+        console.log(res);
+      });
   }
 
   // for when form submits, pass userInput through to axios
@@ -33,7 +86,8 @@ class DisplayingData extends Component {
     event.preventDefault();
     console.log(this.state.userInput)
     if (this.state.userInput !== '') {
-      this.axiosCall(this.state.userInput)
+      this.axiosMovieCall(this.state.userInput)
+      this.axiosBookCall(this.state.userInput)
     }
   }
 
@@ -43,7 +97,6 @@ class DisplayingData extends Component {
       userInput: event.target.value
     })
   }
-
 
   render() {
     return (
@@ -64,3 +117,4 @@ class DisplayingData extends Component {
 }
 
 export default DisplayingData;
+
