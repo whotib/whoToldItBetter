@@ -10,14 +10,12 @@ class App extends Component {
 
   render(){
     return (
-         <Router>
-              <div className="App">
-                  {/* <Landing />   */}
-                   {/* <DisplayingData /> */}
-              <Route path="/data" component={DisplayingData} />
-              <Route exact path="/" component={Landing} />
-              </div>
-         </Router>
+      <Router basename={process.env.PUBLIC_URL}>
+        <div className="App">
+          <Route path="/data" component={DisplayingData} />
+          <Route exact path="/" component={Landing} />
+        </div>
+      </Router>
     );
   }
 }
