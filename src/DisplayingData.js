@@ -14,7 +14,7 @@ class DisplayingData extends Component {
       movieArray: [],
       selectedMovieInfo: {},
       bookArray: [],
-      bookInfo: ''
+      bookInfo: {}
     };
   }
 
@@ -69,16 +69,10 @@ class DisplayingData extends Component {
       xmlToJSON: true,
     })
       .then((res) => {
-        // console.log(res)
         const toJson = JSON.parse(
           convert.xml2json(res.data, { compact: true, spaces: 4 })
         );
-        // console.log(toJson.GoodreadsResponse)
-        console.log(
-          toJson.GoodreadsResponse.search.results.work[0].best_book.title
-        );
         const booksResult = toJson.GoodreadsResponse.search.results.work;
-        // console.log(booksResult);
         return this.setState({
           bookArray: booksResult,
         });
@@ -117,16 +111,15 @@ class DisplayingData extends Component {
     const selectedId = event.target.value;
     this.secondCall(selectedTitle, selectedId);
   };
+
   handleTitleBookOption =(event) => {
     this.setState({
-      bookInfo: event.target.attributes[0].title
-      // {title: event.target.attributes[0].data-title,
-      // ratings: event.target.attributes[2].data-rating,
-      // image: event.target.attributes[1].data-image
-      // }
-    },
-    )
-    // this.movieCall(event.target.id);
+      bookInfo: {
+        title: event.target.attributes[0].value,
+        image: event.target.attributes[1].value, 
+        rating: event.target.attributes[2].value
+      }
+    })
   }
 
   secondCall = (title, id) => {
@@ -176,7 +169,6 @@ class DisplayingData extends Component {
           <ul>
             {this.state.selected === "movie" ? (
               <>
-                {/* {this.state.movieArray.slice([0],[4])} */}
                 {this.state.movieArray.slice([0], [5]).map((movie) => {
                   return (
                     <li
@@ -184,6 +176,9 @@ class DisplayingData extends Component {
                       onClick={this.handleTitleOption}
                       id={movie.title}
                       value={movie.id}
+                      data-title={movie.title}
+                      data-id={movie.id}
+                      data-poster={movie.poster_path}
                     >
                       {movie.title}
                     </li>
@@ -195,7 +190,7 @@ class DisplayingData extends Component {
                     <li key={book.id._text}>
                       <button
                         onClick={this.handleTitleBookOption}
-                        datatitle={book.best_book.title._text}
+                        data-title={book.best_book.title._text}
                         data-value={book.best_book.title.text}
                         data-image={book.best_book.image_url._text}
                         data-rating={book.average_rating._text}
@@ -254,13 +249,14 @@ class DisplayingData extends Component {
           </li>
 
           <li>
-              <h2>{this.state.bookInfo}</h2>
+              <h2>{this.state.bookInfo.title}</h2>
             <div>
-              {/* <img
-                src={this.state.bookArray.best_book.image_url._text}
-                alt={`Book cover for ${this.state.bookArray.best_book.title._text}`} */}
-              {/* /> */}
+              <img
+                src={this.state.bookInfo.image}
+                alt={`Book cover for ${this.state.bookInfo.title}`}
+              />
             </div>
+              <p>Rating: {this.state.bookInfo.rating}</p>
             <p>Loser?</p>
           </li>
         </ul>
