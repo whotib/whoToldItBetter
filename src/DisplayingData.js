@@ -16,7 +16,7 @@ class DisplayingData extends Component {
       listSelectTitle: "",
       listSelectId: "",
       selectedMovieInfo: {},
-      q:""
+      // q:""
     }
   }
 
@@ -57,7 +57,6 @@ class DisplayingData extends Component {
 
   // axios call to Goodreads
   axiosBookCall = (userQ) => {
-    console.log(this.state.listSelectTitle)
     axios({
       method: "GET",
       url: "http://proxy.hackeryou.com",
@@ -75,19 +74,19 @@ class DisplayingData extends Component {
       xmlToJSON: true,
     })
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         const toJson = JSON.parse(convert.xml2json(res.data, {compact: true,spaces: 4,}));
-        console.log(toJson.GoodreadsResponse)
-        // console.log(toJson.GoodreadsResponse.search.results.work[0].best_book.title)
+        // console.log(toJson.GoodreadsResponse)
+        console.log(toJson.GoodreadsResponse.search.results.work[0].best_book.title)
         const booksResult = toJson.GoodreadsResponse.search.results.work;
-        console.log(booksResult);
-        // booksResult.map((book)=>{
-        //   // console.log(book)
-        //   console.log("title",book.best_book.title._text)
-        //   console.log("image",book.best_book.image_url._text);
-        //   console.log("publication year", book.original_publication_year._text)
-        //   console.log("rating", book.average_rating._text)
-        // })
+        // console.log(booksResult);
+        booksResult.map((book)=>{
+          // console.log(book)
+          console.log("title",book.best_book.title._text)
+          console.log("image",book.best_book.image_url._text);
+          console.log("publication year", book.original_publication_year._text)
+          console.log("rating", book.average_rating._text)
+        })
 
       })
       .catch((res) => {
@@ -129,9 +128,9 @@ class DisplayingData extends Component {
     console.log(event.target.id)
     this.setState({
       listSelectTitle: selectedTitle,
-      q: selectedTitle,
+      // q: selectedTitle,
       listSelectId: selectedId
-    }, this.movieCallTwo, this.axiosBookCall(this.state.listSelectTitle) )
+    }, this.movieCallTwo )
   
   }
 
