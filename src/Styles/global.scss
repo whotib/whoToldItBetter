@@ -12,8 +12,8 @@ body {
 
 .wrapper {
     margin: 0 auto;
-    width: 1280px;
-    max-width: 90%;
+    max-width: 1280px;
+    width: 90%;
 }
 
 // LINK Cleanup
@@ -22,3 +22,77 @@ a {
     list-style: none;
 }
 
+
+// FONTS
+h1, .hContainer p { 
+    color: $secondaryColor;
+} 
+
+h1 {
+    font-family: $primaryFont;
+    font-size: calc(2.3vw + 2.7rem);
+    text-transform: uppercase;
+}
+
+main h1{
+    color: $secondaryColor;
+    margin: 0;
+    padding: 2% 5% 0 5%;
+}
+
+.hContainer p {
+    font-family: $secondaryFont;
+    font-size: calc((2.6vw + 2.4rem) * .6);
+    text-transform: lowercase;
+        &::first-letter{
+            text-transform: uppercase;
+        }
+}
+
+main p{
+    font-family: $secondaryFont;
+    font-size: calc((2.6vw + 2.4rem) * .28);
+    // color: $primaryColor;
+    text-align: left;
+        // &::first-letter{
+        //     text-transform: uppercase;
+        // }
+}
+
+button, 
+form{
+    background-color: $secondaryColor;
+    border: none;
+    font-family: $secondaryFont;
+    font-size: calc((.5vw + 1rem));
+    text-transform: uppercase;
+    padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * .4);
+}
+
+// Search
+.mButton{
+    background-color: $primaryColor;
+    color: $secondaryColor;
+    width: 100%;
+}
+
+main button{
+    font-size: calc((.3vw + 1.1rem));
+    text-transform: capitalize;
+    text-align: center;
+    // display: block;
+}
+main input {
+    width: 100%;
+    color: $primaryColor;
+    text-align: center;
+    padding-top: calc((.4vw + 1.1rem) * .2);
+}
+
+form {
+    display: flex;
+}
+
+main li{
+    list-style: none;
+}

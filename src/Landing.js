@@ -6,13 +6,17 @@ class Landing extends Component {
 render(){
   return(
     <header>
-      <h1> Who told it better?</h1>
-      <div className="breakLine"></div>
-      <p>The movie or the book?</p>
-      <NavLink to="/data">
-        <button>continue</button>
-      </NavLink>
-      
+      <div className="hContainer 
+      wrapper">
+        <h1> Who told it better?</h1>
+        <div className="lineWSubtitle">
+          <div className="breakLine"></div>
+          <p>The movie or the book?</p>
+        </div>
+        <NavLink to="/data" className="hButton">
+          <button>continue</button>
+        </NavLink>
+      </div>
     </header>
   )
 }

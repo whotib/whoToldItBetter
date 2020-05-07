@@ -1,0 +1,127 @@
+header,
+main {
+  height: 100vh;
+  background-color: $primaryColor;
+}
+
+main{
+  background-color: $secondaryColor;
+}
+
+.hContainer,
+.mContainer  {
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: repeat(12, 1fr);
+  justify-items: center; 
+  align-items: center; 
+  height: 100%;
+  padding: 5% 0; 
+}
+// Header Container
+.hContainer {
+    h1, .lineWSubtitle, p, 
+    .hButton {
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+    h1{
+      padding-top: 6%;
+      grid-row: 4 / 6;
+      width: 90%;
+      align-self: center;
+    }
+    .lineWSubtitle {
+      grid-row: 6/ 7;
+      width: 60%;
+      padding-top: 5%;
+      margin: 0 auto;
+      align-self: center;
+    }
+    p{
+      width: 100%;
+      margin: 0 auto;
+    }
+    .hButton{
+      grid-row: 7/ 11;
+      align-self: center;
+    }
+}
+
+// Graphic Element
+.breakLine {
+    display: block;
+    width: 80%;
+    margin: 2vh auto;
+    background-color: $accentColor;
+    height: .3vh;
+}
+main .breakLine {
+    // display: block;
+    width: 40%;
+    margin: 0% auto 1.5% ;
+}
+
+
+.mContainer  {
+   padding: 0 0 2.5% 0; 
+    .mTitles, p,form{
+      grid-column: 1 / -1;
+      text-align: center;
+    }
+    .mTitles{
+      // display: block;
+      width: 100%;
+      // height: ;
+      background-color: $primaryColor;
+    }
+    p{
+      width: 70%;
+    }
+
+  }
+
+  .movieUl,
+  .bookUl{
+    grid-row: 4/5;
+    grid-column: 2/7;
+  }
+
+  .bookUl{
+    grid-column: 7/12;
+  }
+
+  .movieLi,
+  .bookLi  {
+    text-align: left;
+  }
+
+  // .compareContainer{
+  //   grid-column: 1/-1;
+  //   grid-row: 6/12;
+  //   display: grid;
+  //   grid-template-columns: repeat(2, 1fr);
+  //   grid-template-rows: repeat(3, 1fr);
+  //   justify-items: center; 
+  //   align-items: center; 
+  // }
+
+  .moviePoster{
+    grid-column: 3/7;
+    grid-row: 7/12;
+  }
+  
+  .bookCover{
+    grid-column: 7/11;
+    grid-row: 7 /12;
+  }
+
+  .imgContainer{
+    height: 400px;
+    object-fit: cover;
+  }
+
+  img{
+    height: 100%;
+    width: 100%;
+  }

@@ -16,7 +16,6 @@ class DisplayingData extends Component {
       bookArray: [],
       bookInfo: {},
       movieInfo: {}
-
     };
   }
 
@@ -134,119 +133,94 @@ class DisplayingData extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>Who Told It Better</h1>
+    <main>
+
+      <div className="mContainer">
+
+        <div className="mTitles">
+          <h1>Who Told It Better</h1>
+          <div className="breakLine"></div>
+        </div>
+
+        <p>Please input your selected title.  You'll be presented with two lists. Please select the matching titles from each lists.</p>
+        
         <form onSubmit={this.handleFormSubmit}>
           <input
             type="text"
             value={this.state.userInput}
             onChange={this.handleFormChange}
-            placeholder="Search"
+            placeholder="Title"
           />
-          <button type="submit" aria-label="Search">
-            {" "}
-            Search{" "}
+          <button type="submit" aria-label="Search" className="mButton">
+            Search
           </button>
         </form>
 
-        {/* WORK IN PROGRESS */}
-        <div>
-          <ul>
-            {this.state.selected === "movie" ? (
-              <>
-                {this.state.movieArray.slice([0], [5]).map((movie) => {
-                  return (
-                    <li
-                      key={movie.id}
-                      onClick={this.handleTitleOption}
-                      value={movie.id}
-                      data-title={movie.title}
-                      data-id={movie.id}
-                      data-poster={movie.poster_path}
-                      data-rating={movie.vote_average}
-                    >
-                      {movie.title}
-                    </li>
-                  );
-                })}
-                ;
-                {this.state.bookArray.slice([0], [5]).map((book) => {
-                  return (
-                    <li key={book.id._text}>
-                      <button
-                        onClick={this.handleTitleBookOption}
-                        data-title={book.best_book.title._text}
-                        data-value={book.best_book.title.text}
-                        data-image={book.best_book.image_url._text}
-                        data-rating={book.average_rating._text}
-                      >
-                        {book.best_book.title._text}
-                      </button>
-                    </li>
-                  );
-                })}
-              </>
-            ) : (
-              <>
-                {this.state.bookArray.slice([0], [5]).map((book) => {
-                  return (
-                    <li key={book.id._text}>
-                      <button
-                        onClick={this.handleTitleBookOption}
-                        data-title={book.best_book.title._text}
-                        data-value={book.best_book.title.text}
-                        data-image={book.best_book.image_url._text}
-                        data-rating={book.average_rating._text}
-                      >
-                        {book.best_book.title._text}
-                      </button>
-                    </li>
-                  );
-                })}
-                {this.state.movieArray.slice([0], [5]).map((movie) => {
-                  return (
-                    <li
-                      key={movie.id}
-                      onClick={this.handleTitleOption}
-                      id={movie.title}
-                      value={movie.id}
-                    >
-                      {movie.title}
-                    </li>
-                  );
-                })}
-                ;
-              </>
-            )}
-          </ul>
-        </div>
 
-        <ul>
-          <li>
+        <ul className="movieUl">
+        {this.state.movieArray.slice([0], [5]).map((movie) => {
+          return (
+            <li key={movie.id} className="movieLi">
+              <button 
+                onClick={this.handleTitleOption}
+                value={movie.id}
+                data-title={movie.title}
+                data-id={movie.id}
+                data-poster={movie.poster_path}
+                data-rating={movie.vote_average}
+              >
+              {movie.title}
+              </button>
+            </li>
+            );
+          })};
+          </ul>
+          
+        <ul className="bookUl">
+          {this.state.bookArray.slice([0], [5]).map((book) => {
+            return (
+              <li key={book.id._text} className="bookLi">
+                <button
+                  onClick={this.handleTitleBookOption}
+                  data-title={book.best_book.title._text}
+                  data-value={book.best_book.title.text}
+                  data-image={book.best_book.image_url._text}
+                  data-rating={book.average_rating._text}
+                >
+                {book.best_book.title._text}
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+
+        
+          <li className="moviePoster">
             <h2>{this.state.selectedMovieInfo.title}</h2>
-            <div>
+            <div className='imgContainer'>
               <img
                 src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
                 alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
               />
             </div>
-            <p>Winner?</p>
+            <p>Rating: </p>
           </li>
 
-          <li>
+            <li className="bookCover">
               <h2>{this.state.bookInfo.title}</h2>
-            <div>
+            <div className='imgContainer'>
               <img
                 src={this.state.bookInfo.image}
                 alt={`Book cover for ${this.state.bookInfo.title}`}
               />
             </div>
-              <p>Rating: {this.state.bookInfo.rating}</p>
-            <p>Loser?</p>
+            <p>Rating: {this.state.bookInfo.rating}</p>
           </li>
-        </ul>
-        {/* WORK IN PROGRESS */}
+        
+
       </div>
+
+    </main>
     );
   }
 }
