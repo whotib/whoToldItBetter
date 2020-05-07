@@ -8,11 +8,8 @@ class DisplayingData extends Component {
   constructor() {
     super();
     this.state = {
-      Array: [],
       userInput: "",
-      selected: "movie",
       movieArray: [],
-      selectedMovieInfo: {},
       bookArray: [],
       bookInfo: {},
       movieInfo: {}
@@ -20,14 +17,15 @@ class DisplayingData extends Component {
   }
 
   // axios call to TMDB
-  movieCall = (userQuery) => {
+  movieCall = (userQ) => {
     axios({
       url: `https://api.themoviedb.org/3/search/movie`,
       method: `GET`,
       responseType: `json`,
       params: {
         api_key: `4f70306aa4e939e1535c12686b6403c7`,
-        query: userQuery,
+        query: userQ,
+        include_adult: 'false',
       },
     }).then((response) => {
       console.log(response.data.results)
@@ -88,25 +86,30 @@ class DisplayingData extends Component {
   };
 
   handleTitleOption = (event) => {
-    console.log(event.target.attributes)
+    console.log(event.target.attributes[3].value)
+    let movieRating = event.target.attributes[3].value * 10
     this.setState({
       movieInfo: {
         title: event.target.attributes[0].value,
         id: event.target.attributes[1].value,
         image: event.target.attributes[2].value,
-        rating: event.target.attributes[3].value
+        rating: movieRating
       }
     })
   };
 
   handleTitleBookOption =(event) => {
+    console.log("Book Rating" + event.target.attributes[2].value)
+    let bookRating = event.target.attributes[2].value
+    let newBookRating = Math.round((bookRating * 2) * 10)
     this.setState({
       bookInfo: {
         title: event.target.attributes[0].value,
         image: event.target.attributes[1].value, 
-        rating: event.target.attributes[2].value
+        rating: newBookRating
       }
     })
+
   }
 
   secondCall = (title, id) => {
@@ -154,6 +157,7 @@ class DisplayingData extends Component {
                   >
                     {movie.title}
                   </button>
+
                 </li>
               );
             })}
@@ -216,6 +220,7 @@ class DisplayingData extends Component {
           </div>
         </div>
       </main>
+
     );
   }
 }
