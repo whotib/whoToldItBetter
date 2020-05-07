@@ -17,29 +17,22 @@ body {
 }
 
 // LINK Cleanup
-a {
+a, main li{
     text-decoration: none;
     list-style: none;
 }
 
 
 // FONTS
+// Landing Page
 h1, .hContainer p { 
     color: $secondaryColor;
 } 
-
 h1 {
     font-family: $primaryFont;
     font-size: calc(2.3vw + 2.7rem);
     text-transform: uppercase;
 }
-
-main h1{
-    color: $secondaryColor;
-    margin: 0;
-    padding: 2% 5% 0 5%;
-}
-
 .hContainer p {
     font-family: $secondaryFont;
     font-size: calc((2.6vw + 2.4rem) * .6);
@@ -49,16 +42,19 @@ main h1{
         }
 }
 
+
+// MAIN Page
+main h1{
+    color: $secondaryColor;
+    margin: 0;
+    padding: 2% 5% 0 5%;
+}
 main p{
     font-family: $secondaryFont;
     font-size: calc((2.6vw + 2.4rem) * .28);
-    // color: $primaryColor;
     text-align: left;
-        // &::first-letter{
-        //     text-transform: uppercase;
-        // }
 }
-
+// NOTE: list items are buttons !!
 button, 
 form{
     background-color: $secondaryColor;
@@ -66,33 +62,30 @@ form{
     font-family: $secondaryFont;
     font-size: calc((.5vw + 1rem));
     text-transform: uppercase;
-    padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * .4);
+    padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
 }
 
-// Search
+
+// Search-Main Page
+form {
+    display: flex;
+}
+main input {
+    color: $primaryColor;
+    text-align: center;
+    padding: 0 calc((.4vw + 1.1rem) * 1); //width of input
+    padding-top: calc((.4vw + 1.1rem) * .25);
+}
 .mButton{
     background-color: $primaryColor;
     color: $secondaryColor;
-    width: 100%;
+    // width: 100%;
 }
 
+
+// List Items
 main button{
     font-size: calc((.3vw + 1.1rem));
     text-transform: capitalize;
     text-align: center;
-    // display: block;
-}
-main input {
-    width: 100%;
-    color: $primaryColor;
-    text-align: center;
-    padding-top: calc((.4vw + 1.1rem) * .2);
-}
-
-form {
-    display: flex;
-}
-
-main li{
-    list-style: none;
 }

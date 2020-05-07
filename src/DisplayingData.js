@@ -133,94 +133,108 @@ class DisplayingData extends Component {
 
   render() {
     return (
-    <main>
+         <main>
+              <div className="mContainer">
+                   <div className="mTitles">
+                        <h1>Who Told It Better</h1>
+                        <div className="breakLine"></div>
+                   </div>
 
-      <div className="mContainer">
+                   <p>
+                        Please input your selected title. You'll be presented
+                        with two lists. Please select the matching titles from
+                        each lists.
+                   </p>
 
-        <div className="mTitles">
-          <h1>Who Told It Better</h1>
-          <div className="breakLine"></div>
-        </div>
+                   <form onSubmit={this.handleFormSubmit}>
+                        <input
+                             type="text"
+                             value={this.state.userInput}
+                             onChange={this.handleFormChange}
+                             placeholder="Title"
+                        />
+                        <button
+                             type="submit"
+                             aria-label="Search"
+                             className="mButton"
+                        >
+                             Search
+                        </button>
+                   </form>
 
-        <p>Please input your selected title.  You'll be presented with two lists. Please select the matching titles from each lists.</p>
-        
-        <form onSubmit={this.handleFormSubmit}>
-          <input
-            type="text"
-            value={this.state.userInput}
-            onChange={this.handleFormChange}
-            placeholder="Title"
-          />
-          <button type="submit" aria-label="Search" className="mButton">
-            Search
-          </button>
-        </form>
+                   <ul className="movieUl">
+                        <h3 id="movieList">Movie List</h3>
+                        {this.state.movieArray.slice([0], [5]).map((movie) => {
+                             return (
+                                  <li key={movie.id} className="movieLi">
+                                       <button
+                                            onClick={this.handleTitleOption}
+                                            value={movie.id}
+                                            data-title={movie.title}
+                                            data-id={movie.id}
+                                            data-poster={movie.poster_path}
+                                            data-rating={movie.vote_average}
+                                            aria-labelledby="movieList"
+                                       >
+                                            {movie.title}
+                                       </button>
+                                  </li>
+                             );
+                        })}
+                        ;
+                   </ul>
 
+                   <ul className="bookUl">
+                        <h3 id="bookList">Book List</h3>
+                        {this.state.bookArray.slice([0], [5]).map((book) => {
+                             return (
+                                  <li key={book.id._text} className="bookLi">
+                                       <button
+                                            onClick={this.handleTitleBookOption}
+                                            data-title={
+                                                 book.best_book.title._text
+                                            }
+                                            data-value={
+                                                 book.best_book.title.text
+                                            }
+                                            data-image={
+                                                 book.best_book.image_url._text
+                                            }
+                                            data-rating={
+                                                 book.average_rating._text
+                                            }
+                                            aria-labelledby="bookList"
+                                       >
+                                            {book.best_book.title._text}
+                                       </button>
+                                  </li>
+                             );
+                        })}
+                   </ul>
 
-        <ul className="movieUl">
-        {this.state.movieArray.slice([0], [5]).map((movie) => {
-          return (
-            <li key={movie.id} className="movieLi">
-              <button 
-                onClick={this.handleTitleOption}
-                value={movie.id}
-                data-title={movie.title}
-                data-id={movie.id}
-                data-poster={movie.poster_path}
-                data-rating={movie.vote_average}
-              >
-              {movie.title}
-              </button>
-            </li>
-            );
-          })};
-          </ul>
-          
-        <ul className="bookUl">
-          {this.state.bookArray.slice([0], [5]).map((book) => {
-            return (
-              <li key={book.id._text} className="bookLi">
-                <button
-                  onClick={this.handleTitleBookOption}
-                  data-title={book.best_book.title._text}
-                  data-value={book.best_book.title.text}
-                  data-image={book.best_book.image_url._text}
-                  data-rating={book.average_rating._text}
-                >
-                {book.best_book.title._text}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+                   <div className="moviePoster">
+                        <h2>{this.state.selectedMovieInfo.title}</h2>
+                        <div className="imgContainer">
+                             <img
+                                  src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
+                                  alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
+                             />
+                        </div>
+                        <p>Rating: </p>
+                   </div>
 
-        
-          <li className="moviePoster">
-            <h2>{this.state.selectedMovieInfo.title}</h2>
-            <div className='imgContainer'>
-              <img
-                src={`http://image.tmdb.org/t/p/w500/${this.state.selectedMovieInfo.poster_path}`}
-                alt={`Movie Poster of ${this.state.selectedMovieInfo.title}`}
-              />
-            </div>
-            <p>Rating: </p>
-          </li>
-
-            <li className="bookCover">
-              <h2>{this.state.bookInfo.title}</h2>
-            <div className='imgContainer'>
-              <img
-                src={this.state.bookInfo.image}
-                alt={`Book cover for ${this.state.bookInfo.title}`}
-              />
-            </div>
-            <p>Rating: {this.state.bookInfo.rating}</p>
-          </li>
-        
-
-      </div>
-
-    </main>
+                   <div className="bookCover">
+                        <h2>{this.state.bookInfo.title}</h2>
+                        <div className="imgContainer">
+                             <img
+                                  src={this.state.bookInfo.image}
+                                  alt={`Book cover for ${this.state.bookInfo.title}`}
+                             />
+                        </div>
+                        <p>Rating: {this.state.bookInfo.rating}</p>
+                   </div>
+              </div>
+         </main>
     );
   }
 }
