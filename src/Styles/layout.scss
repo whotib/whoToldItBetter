@@ -1,4 +1,8 @@
 // Backgrounds Set
+*{
+  border: red 1px solid
+}
+
 header,
 main {
   height: 100vh;
@@ -102,13 +106,14 @@ main .breakLine {
   .moviePoster{
     grid-column: 3/7;
     grid-row: 7/12;
+    justify-self: center;
   }
   .bookCover{
     grid-column: 7/11;
     grid-row: 7 /12;
   }
   .imgContainer{
-    height: 400px;
+    width: 200px;
     object-fit: cover;
   }
   img{
