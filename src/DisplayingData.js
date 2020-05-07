@@ -35,9 +35,15 @@ class DisplayingData extends Component {
       },
     }).then((response) => {
       console.log(response.data.results)
-      this.setState({
-        movieArray: response.data.results,
-      });
+      response.data.results.length > 0 ? (
+        this.setState({
+          movieArray: response.data.results,
+        })
+        ) : (
+        this.setState({
+          movieArray: undefined
+        })
+        )
     });
   };
 
@@ -158,22 +164,26 @@ class DisplayingData extends Component {
 
           <ul className="movieUl">
             <h3 id="movieList">Movie List</h3>
-            {this.state.movieArray.slice([0], [5]).map((movie) => {
-              return (
-                <li key={movie.id} className="movieLi">
-                  <button
-                    onClick={this.handleTitleOption}
-                    data-title={movie.title}
-                    data-id={movie.id}
-                    data-poster={movie.poster_path}
-                    data-rating={movie.vote_average}
-                    aria-labelledby="movieList"
-                  >
-                    {movie.title}
-                  </button>
-                </li>
-              );
-            })}
+            {this.state.movieArray === undefined ? (
+              <p>Sorry, no movies matched!</p>
+            ) : (
+              this.state.movieArray.slice([0], [5]).map((movie) => {
+                return (
+                  <li key={movie.id} className="movieLi">
+                    <button
+                      onClick={this.handleTitleOption}
+                      data-title={movie.title}
+                      data-id={movie.id}
+                      data-poster={movie.poster_path}
+                      data-rating={movie.vote_average}
+                      aria-labelledby="movieList"
+                    >
+                      {movie.title}
+                    </button>
+                  </li>
+                );
+              })
+            )}
           </ul>
 
           <ul className="bookUl">
