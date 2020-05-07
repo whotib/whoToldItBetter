@@ -49,12 +49,15 @@ main h1{
     margin: 0;
     padding: 2% 5% 0 5%;
 }
-
 h2{
     padding: 0;
     margin: 0 auto;
-    text-align: center;
-    
+    text-align: center;  
+}
+h3{
+    font-family: $secondaryFont;
+    font-size: calc((2.6vw + 2.4rem) * .28);
+    text-transform: capitalize;
 }
 main p{
     font-family: $secondaryFont;
@@ -63,6 +66,7 @@ main p{
     margin: 0;
     padding: 0;
 }
+
 // NOTE: list items are buttons !!
 button, 
 form{
@@ -73,7 +77,6 @@ form{
     text-transform: uppercase;
     padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
 }
-
 
 // Search-Main Page
 form {
@@ -89,11 +92,33 @@ main input {
     background-color: $primaryColor;
     color: $secondaryColor;
 }
-
-
-// List Items
-main button{
+main button {
     font-size: calc((.3vw + 1.1rem));
     text-transform: capitalize;
-    text-align: center;
+    text-align: left;
 }
+
+// ************** Style list items here ******************
+
+// GRIDS ...Lists of Books
+.movieUl,
+.bookUl{
+    grid-row: 9/10;
+    grid-column: 2/7;
+    width: 100%;
+    justify-content: center;
+    align-self: start;
+    padding: 0 5%;
+}
+.bookUl{
+    grid-column: 7/12;
+}
+
+.movieLi,
+.bookLi  {
+    text-align: center;
+    display: inline; 
+}
+
+
+// credit for images the Noun Project, created by DinosoftLabs
