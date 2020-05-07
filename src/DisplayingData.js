@@ -149,7 +149,7 @@ class DisplayingData extends Component {
               type="text"
               value={this.state.userInput}
               onChange={this.handleFormChange}
-              placeholder="Title"
+              placeholder="Title" required
             />
             <button type="submit" aria-label="Search" className="mButton">
               Search
