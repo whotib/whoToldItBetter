@@ -89,11 +89,11 @@ main .breakLine {
   // Lists of Books
   .movieUl,
   .bookUl{
-    grid-row: 4/5;
-    grid-column: 2/7;
+    // grid-row: 4/5;
+    grid-column: 2/9;
   }
   .bookUl{
-    grid-column: 7/12;
+    grid-column: 2/12;
   }
   .movieLi,
   .bookLi  {
@@ -131,3 +131,11 @@ main .breakLine {
     width: 100%;
   }
 
+  .buttonChoices {
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    border: 1px black solid;
+    margin:3px;
+    border-radius: 2px;
+  }

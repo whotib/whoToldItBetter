@@ -113,17 +113,17 @@ class DisplayingData extends Component {
         }
       })
     }
-    
+
   };
 
-  handleTitleBookOption =(event) => {
+  handleTitleBookOption = (event) => {
     console.log("Book Rating" + event.target.attributes[2].value)
     let bookRating = event.target.attributes[2].value
     let newBookRating = Math.round((bookRating * 2) * 10)
     this.setState({
       bookInfo: {
         title: event.target.attributes[0].value,
-        image: event.target.attributes[1].value, 
+        image: event.target.attributes[1].value,
         rating: newBookRating
       }
     })
@@ -156,49 +156,51 @@ class DisplayingData extends Component {
             </button>
           </form>
 
-          <ul className="movieUl">
+          <div className="movieUl">
             <h3 id="movieList">Movie List</h3>
             {this.state.movieArray.slice([0], [5]).map((movie) => {
               return (
-                <li key={movie.id} className="movieLi">
-                  <button
-                    onClick={this.handleTitleOption}
-                    data-title={movie.title}
-                    data-id={movie.id}
-                    data-poster={movie.poster_path}
-                    data-rating={movie.vote_average}
-                    aria-labelledby="movieList"
-                  >
-                    {movie.title}
-                  </button>
-                </li>
+
+                <button
+                  key={movie.id}
+                  onClick={this.handleTitleOption}
+                  data-title={movie.title}
+                  data-id={movie.id}
+                  data-poster={movie.poster_path}
+                  data-rating={movie.vote_average}
+                  aria-labelledby="movieList"
+                  className="buttonChoices"
+                >
+                  {movie.title}
+                </button>
+
               );
             })}
-          </ul>
+          </div>
 
-          <ul className="bookUl">
+          <div className="bookUl">
             <h3 id="bookList">Book List</h3>
             {this.state.bookArray === undefined ? (
               <p>Sorry, no books matched!</p>
             ) : (
-              this.state.bookArray.slice([0], [5]).map((book) => {
-                return (
-                  <li key={book.id._text} className="bookLi">
+                this.state.bookArray.slice([0], [5]).map((book) => {
+                  return (
                     <button
+                      key={book.id._text}
                       onClick={this.handleTitleBookOption}
                       data-title={book.best_book.title._text}
                       data-value={book.best_book.title.text}
                       data-image={book.best_book.image_url._text}
                       data-rating={book.average_rating._text}
                       aria-labelledby="bookList"
+                      className="buttonChoices"
                     >
                       {book.best_book.title._text}
                     </button>
-                  </li>
-                );
-              })
-            )}
-          </ul>
+                  );
+                })
+              )}
+          </div>
 
           <div className="moviePoster">
             <h2>{this.state.movieInfo.title}</h2>
@@ -209,15 +211,15 @@ class DisplayingData extends Component {
                   alt={`A cartoon style movie clapperboard.`}
                 />
               ) : (
-                <img
-                  src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
-                  alt={`Movie Poster of ${this.state.movieInfo.title}`}
-                />
-              )}
+                  <img
+                    src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
+                    alt={`Movie Poster of ${this.state.movieInfo.title}`}
+                  />
+                )}
             </div>
             {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
-            
-            {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p>winner!!</p> : "" }
+
+            {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p>winner!!</p> : ""}
           </div>
 
           <div className="bookCover">
@@ -229,14 +231,14 @@ class DisplayingData extends Component {
                   alt={`An cartoon style open book.`}
                 />
               ) : (
-                <img
-                  src={this.state.bookInfo.image}
-                  alt={`Book cover for ${this.state.bookInfo.title}`}
-                />
-              )}
+                  <img
+                    src={this.state.bookInfo.image}
+                    alt={`Book cover for ${this.state.bookInfo.title}`}
+                  />
+                )}
             </div>
-            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p>: ""}
-            
+            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
+
             {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p>Winner</p> : ""}
           </div>
         </div>
@@ -246,4 +248,3 @@ class DisplayingData extends Component {
 }
 
 export default DisplayingData;
-
