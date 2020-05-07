@@ -216,6 +216,7 @@ class DisplayingData extends Component {
               )}
             </div>
             <p>Rating: {this.state.movieInfo.rating}</p>
+            {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p>Winner!!</p> : "" }
           </div>
 
           <div className="bookCover">
@@ -234,6 +235,7 @@ class DisplayingData extends Component {
               )}
             </div>
             <p>Rating: {this.state.bookInfo.rating}</p>
+            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p>Winner</p> : ""}
           </div>
         </div>
       </main>
