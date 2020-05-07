@@ -56,7 +56,7 @@ class DisplayingData extends Component {
   axiosBookCall = (userQ) => {
     axios({
       method: "GET",
-      url: "http://proxy.hackeryou.com",
+      url: "https://proxy.hackeryou.com",
       dataType: "json",
       paramsSerializer: function (params) {
         return Qs.stringify(params, { arrayFormat: "brackets" });
