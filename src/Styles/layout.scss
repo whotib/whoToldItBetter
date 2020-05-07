@@ -1,11 +1,7 @@
 // Backgrounds Set
-*{
-  border: red 1px solid
-}
-
 header,
 main {
-  height: 100vh;
+  min-height: 100vh; //  !!!!SETS background to fill empty space
   background-color: $primaryColor;
 }
 
@@ -22,18 +18,16 @@ main{
     height: .3vh;
 }
 main .breakLine {
-    // display: block;
     width: 40%;
     margin: 0% auto 1.5% ;
 }
-
 
 // Both Container Base Settings
 .hContainer,
 .mContainer  {
   display:grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(12, 1fr);
+  grid-template-rows: auto;
   justify-items: center; 
   align-items: center; 
   height: 100%;
@@ -48,7 +42,7 @@ main .breakLine {
       text-align: center;
     }
     h1{
-      padding-top: 6%;
+      padding-top: 20vh;
       grid-row: 4 / 6;
       width: 90%;
       align-self: center;
@@ -65,6 +59,7 @@ main .breakLine {
       margin: 0 auto;
     }
     .hButton{
+      margin: 2vh;
       grid-row: 7/ 11;
       align-self: center;
     }
@@ -78,13 +73,15 @@ main .breakLine {
       text-align: center;
     }
     .mTitles{
-      // display: block;
       width: 100%;
-      // height: ;
       background-color: $primaryColor;
     }
     p{
       width: 70%;
+      padding: 1.3vh 0;
+    }
+    form{
+      padding-bottom: 1vh;
     }
 }
 
@@ -103,20 +100,33 @@ main .breakLine {
   }
 
   // Image Elements Primarily
+  // MAIN Image components
+  .moviePoster,
+  .bookCover{
+    margin: 10%;
+    padding: 0; 
+    justify-content: center;   
+      p {
+        margin: 0 auto;    
+      }
+  }
   .moviePoster{
-    grid-column: 3/7;
-    grid-row: 7/12;
-    justify-self: center;
+    grid-column: 2 / 7;
+    // grid-row: 8/13;
   }
   .bookCover{
-    grid-column: 7/11;
-    grid-row: 7 /12;
+    grid-column: 7 / 12;
+    // grid-row: 8/13;
   }
+
   .imgContainer{
-    width: 200px;
+    min-width: 200px;
+    height: 300px;
+    margin: 1vh;
     object-fit: cover;
   }
   img{
     height: 100%;
     width: 100%;
   }
+
