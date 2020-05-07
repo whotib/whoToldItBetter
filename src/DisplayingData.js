@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Qs from "qs";
 import convert from 'xml-js'
+import { number } from 'prop-types';
 
 
 class DisplayingData extends Component {
@@ -12,7 +13,12 @@ class DisplayingData extends Component {
       movieArray: [],
       bookArray: [],
       bookInfo: {},
-      movieInfo: {}
+      movieInfo: {
+        title: "",
+        id: "",
+        image: "no poster",
+        rating: ""
+      }
     };
   }
 
@@ -86,16 +92,28 @@ class DisplayingData extends Component {
   };
 
   handleTitleOption = (event) => {
-    console.log(event.target.attributes[3].value)
+    console.log(event.target.attributes)
     let movieRating = event.target.attributes[3].value * 10
-    this.setState({
-      movieInfo: {
-        title: event.target.attributes[0].value,
-        id: event.target.attributes[1].value,
-        image: event.target.attributes[2].value,
-        rating: movieRating
-      }
-    })
+    if (event.target.attributes[2].name === "data-poster") {
+      this.setState({
+        movieInfo: {
+          title: event.target.attributes[0].value,
+          id: event.target.attributes[1].value,
+          image: event.target.attributes[2].value,
+          rating: movieRating
+        }
+      })
+    } else {
+      this.setState({
+        movieInfo: {
+          title: event.target.attributes[0].value,
+          id: event.target.attributes[1].value,
+          image: "no poster",
+          rating: event.target.attributes[2].value * 10
+        }
+      })
+    }
+    
   };
 
   handleTitleBookOption =(event) => {
@@ -186,13 +204,13 @@ class DisplayingData extends Component {
           <div className="moviePoster">
             <h2>{this.state.movieInfo.title}</h2>
             <div className="imgContainer">
-              {this.state.movieInfo.image === undefined || null || '' ? (
+              {this.state.movieInfo.image === "no poster" ? (
                 <img
                   src={"./Assets/movie.png"}
                   alt={`An image of a movie clapperboard.`}
                 />
               )
-              :(
+                : (
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
                   alt={`Movie Poster of ${this.state.movieInfo.title}`}
