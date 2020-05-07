@@ -130,10 +130,6 @@ class DisplayingData extends Component {
 
   }
 
-  secondCall = (title, id) => {
-    this.movieCallTwo(id);
-  };
-
   render() {
     return (
       <main>
@@ -175,7 +171,6 @@ class DisplayingData extends Component {
                   >
                     {movie.title}
                   </button>
-
                 </li>
               );
             })}
@@ -183,22 +178,26 @@ class DisplayingData extends Component {
 
           <ul className="bookUl">
             <h3 id="bookList">Book List</h3>
-            {this.state.bookArray.slice([0], [5]).map((book) => {
-              return (
-                <li key={book.id._text} className="bookLi">
-                  <button
-                    onClick={this.handleTitleBookOption}
-                    data-title={book.best_book.title._text}
-                    data-value={book.best_book.title.text}
-                    data-image={book.best_book.image_url._text}
-                    data-rating={book.average_rating._text}
-                    aria-labelledby="bookList"
-                  >
-                    {book.best_book.title._text}
-                  </button>
-                </li>
-              );
-            })}
+            {this.state.bookArray === undefined ? (
+              <p>Sorry, no books matched!</p>
+            ) : (
+              this.state.bookArray.slice([0], [5]).map((book) => {
+                return (
+                  <li key={book.id._text} className="bookLi">
+                    <button
+                      onClick={this.handleTitleBookOption}
+                      data-title={book.best_book.title._text}
+                      data-value={book.best_book.title.text}
+                      data-image={book.best_book.image_url._text}
+                      data-rating={book.average_rating._text}
+                      aria-labelledby="bookList"
+                    >
+                      {book.best_book.title._text}
+                    </button>
+                  </li>
+                );
+              })
+            )}
           </ul>
 
           <div className="moviePoster">
@@ -207,10 +206,9 @@ class DisplayingData extends Component {
               {this.state.movieInfo.image === "no poster" ? (
                 <img
                   src={"./Assets/movie.png"}
-                  alt={`An image of a movie clapperboard.`}
+                  alt={`A cartoon style movie clapperboard.`}
                 />
-              )
-                : (
+              ) : (
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
                   alt={`Movie Poster of ${this.state.movieInfo.title}`}
@@ -223,22 +221,22 @@ class DisplayingData extends Component {
           <div className="bookCover">
             <h2>{this.state.bookInfo.title}</h2>
             <div className="imgContainer">
-              {this.state.bookInfo.image === {}
-              ? <img
-                src={this.state.bookInfo.image}
-                alt={`Book cover for ${this.state.bookInfo.title}`}
-              />
-              : <img
-                src={"./Assets/book.png"}
-                alt={`An image of a an open book.`}
-              />
-              }
+              {this.state.bookInfo.image === undefined || "" ? (
+                <img
+                  src={"./Assets/book.png"}
+                  alt={`An cartoon style open book.`}
+                />
+              ) : (
+                <img
+                  src={this.state.bookInfo.image}
+                  alt={`Book cover for ${this.state.bookInfo.title}`}
+                />
+              )}
             </div>
             <p>Rating: {this.state.bookInfo.rating}</p>
           </div>
         </div>
       </main>
-
     );
   }
 }
