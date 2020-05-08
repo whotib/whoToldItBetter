@@ -34,9 +34,17 @@ class DisplayingData extends Component {
         include_adult: 'false',
       },
     }).then((response) => {
-      this.setState({
-        movieArray: response.data.results,
-      });
+
+      console.log(response.data.results)
+      response.data.results.length > 0 ? (
+        this.setState({
+          movieArray: response.data.results,
+        })
+        ) : (
+        this.setState({
+          movieArray: undefined
+        })
+        )
     });
   };
 
@@ -161,27 +169,30 @@ class DisplayingData extends Component {
             Search
           </button>
         </form>
-
-        <div className="movies">
-          <h3 id="movieList">Movie List</h3> 
-          {this.state.movieArray.slice([0], [5]).map((movie) => {
-            return (
-              <>
-              <button
-                key={movie.id} 
-                onClick={this.handleTitleOption}
-                data-title={movie.title}
-                data-id={movie.id}
-                data-poster={movie.poster_path}
-                data-rating={movie.vote_average}
-                aria-labelledby="movieList"
-                className="buttonChoices">
-                  {movie.title}
-              </button>
-              </>
-            );
-          })}
-        </div>
+          
+          
+     <div className="movies">
+            <h3 id="movieList">Movie List</h3>
+            {this.state.movieArray === undefined ? (
+              <p>Sorry, no movies matched!</p>
+            ) : (
+              this.state.movieArray.slice([0], [5]).map((movie) => {
+                return (
+                  <>
+                    <button
+                      key={movie.id}
+                      onClick={this.handleTitleOption}
+                      data-title={movie.title}
+                      data-id={movie.id}
+                      data-poster={movie.poster_path}
+                      data-rating={movie.vote_average}
+                      aria-labelledby="movieList"
+                      className="buttonChoices">
+                    >
+                      {movie.title}
+                    </button>
+                  </>
+                  </div>
 
         <div className="books">
             <h3 id="bookList">Book List</h3>
