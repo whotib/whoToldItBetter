@@ -227,14 +227,14 @@ class DisplayingData extends Component {
                 alt={`A cartoon style movie clapperboard.`}
               />
               ) : (
-                <img
+                  <img className={this.state.movieInfo.rating > this.state.bookInfo.rating ? "selectedImg" : null}
                   src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
                   alt={`Movie Poster of ${this.state.movieInfo.title}`}
                 />
               )}
           </div>
           {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
-          {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Best rated</p> : "" }
+          {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
         </div>
 
         <div className="bookCover">
@@ -247,14 +247,14 @@ class DisplayingData extends Component {
                     alt={`An cartoon style open book.`}
                   />
               ) : (
-                  <img
+                  <img className={this.state.movieInfo.rating < this.state.bookInfo.rating ? "selectedImg" : null }
                     src={this.state.bookInfo.image}
                     alt={`Book cover for ${this.state.bookInfo.title}`}
                   />
               )}
             </div>
             {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
-            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Best rated</p> : ""}
+            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
         </div>
       </div>
     </main>
