@@ -18,7 +18,8 @@ class DisplayingData extends Component {
         id: "",
         image: "no poster",
         rating: ""
-      }
+      },
+      active: false
     };
   }
 
@@ -81,6 +82,9 @@ class DisplayingData extends Component {
   // for when form submits, pass userInput through to axios
   handleFormSubmit = (event) => {
     event.preventDefault();
+    this.setState({
+      active: true
+    })
     if (this.state.userInput !== "") {
       this.movieCall(this.state.userInput);
       this.axiosBookCall(this.state.userInput);
@@ -167,32 +171,35 @@ class DisplayingData extends Component {
             Search
           </button>
         </form>
-          
-          
-     <div className="movies">
-            <h3 id="movieList">Movie List</h3>
-            {this.state.movieArray === undefined ? (
-              <p>Sorry, no movies matched!</p>
-            ) : (
-              this.state.movieArray.slice([0], [5]).map((movie) => {
-                return (
-                  <>
-                    <button
-                      key={movie.id}
-                      onClick={this.handleTitleOption}
-                      data-title={movie.title}
-                      data-id={movie.id}
-                      data-poster={movie.poster_path}
-                      data-rating={movie.vote_average}
-                      aria-labelledby="movieList"
-                      className="buttonChoices">
-                      {movie.title}
-                    </button>
-              </>
-                )}
-              )
-            )}
-                  </div>
+
+
+        {
+          this.state.active ? 
+        <>
+        <div className="movies">
+          <h3 id="movieList">Movie List</h3>
+          {this.state.movieArray === undefined ? (
+            <p>Sorry, no movies matched!</p>
+          ) : (
+            this.state.movieArray.slice([0], [5]).map((movie) => {
+              return (
+                <>
+                  <button
+                    key={movie.id}
+                    onClick={this.handleTitleOption}
+                    data-title={movie.title}
+                    data-id={movie.id}
+                    data-poster={movie.poster_path}
+                    data-rating={movie.vote_average}
+                    aria-labelledby="movieList"
+                    className="buttonChoices">
+                    {movie.title}
+                  </button>
+                </>
+              )}
+            )
+          )}
+        </div>
 
         <div className="books">
             <h3 id="bookList">Book List</h3>
@@ -216,6 +223,10 @@ class DisplayingData extends Component {
             })
             )}
         </div>
+          
+        </>
+        : null  }
+
 
         <div className="moviePoster">
           <h2>{this.state.movieInfo.title}</h2>
