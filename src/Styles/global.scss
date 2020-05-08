@@ -68,6 +68,17 @@ main p{
     padding: 0;
 }
 
+.landingButton:focus,
+.landingButton:hover{
+    // border:2px solid black;
+    letter-spacing: 2px;
+    padding:10px 25px 8px 25px;
+    transition: all 0.5s; 
+    border-radius: 0;  
+    background-color: rgba(0,0,0,0.8);
+    color:white;    
+}
+
 
 button,
 form{
@@ -112,16 +123,6 @@ main button {
 }
 
 // ************** movies and book choices styling ******************
-.landingButton:focus,
-.landingButton:hover{
-    // border:2px solid black;
-    letter-spacing: 2px;
-    padding:10px 25px 8px 25px;
-    transition: all 0.5s; 
-    border-radius: 0;  
-    background-color: rgba(0,0,0,0.8);
-    color:white;    
-}
 // GRIDS ...Lists of Books
 .movies,
 .books{
