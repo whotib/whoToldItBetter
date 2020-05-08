@@ -51,7 +51,7 @@ main .breakLine {
     .lineWSubtitle {
       grid-row: 6/ 7;
       width: 60%;
-      padding-top: 5%;
+      // padding-top: 5%;
       margin: 0 auto;
       align-self: center;
     }
@@ -100,6 +100,12 @@ main .breakLine {
     }
 }
 
+  // Lists of Books
+  .books{
+    grid-column: 2/14;
+  }
+
+
   // Image Elements Primarily
   // MAIN Image components
   .moviePoster,
@@ -109,7 +115,8 @@ main .breakLine {
     grid-row: 10 /12;
     justify-content: center;   
       p {
-        margin: 0 auto;    
+        margin: 0 auto;
+        padding-top:2.3vh;    
       }
   }
   .moviePoster{
@@ -124,11 +131,13 @@ main .breakLine {
     height: 300px;
     margin: 1vh;
     object-fit: cover;
+    margin: 0 auto;
 
   }
   img{
     height: 100%;
     width: 100%;
+    margin: 12px 0 12px 0;
 
   }
 
