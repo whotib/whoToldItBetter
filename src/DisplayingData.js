@@ -34,6 +34,7 @@ class DisplayingData extends Component {
         include_adult: 'false',
       },
     }).then((response) => {
+
       console.log(response.data.results)
       response.data.results.length > 0 ? (
         this.setState({
@@ -75,7 +76,7 @@ class DisplayingData extends Component {
         });
       })
       .catch((res) => {
-        console.log("no book response");
+        alert("No response, try again");
       });
   };
 
@@ -86,7 +87,7 @@ class DisplayingData extends Component {
       this.movieCall(this.state.userInput);
       this.axiosBookCall(this.state.userInput);
     } else {
-      console.log('This didnt work')
+      alert("try that again")
     }
   };
 
@@ -98,7 +99,6 @@ class DisplayingData extends Component {
   };
 
   handleTitleOption = (event) => {
-    console.log(event.target.attributes)
     let movieRating = event.target.attributes[3].value * 10
     if (event.target.attributes[2].name === "data-poster") {
       this.setState({
@@ -119,17 +119,16 @@ class DisplayingData extends Component {
         }
       })
     }
-    
+
   };
 
-  handleTitleBookOption =(event) => {
-    console.log("Book Rating" + event.target.attributes[2].value)
+  handleTitleBookOption = (event) => {
     let bookRating = event.target.attributes[2].value
     let newBookRating = Math.round((bookRating * 2) * 10)
     this.setState({
       bookInfo: {
         title: event.target.attributes[0].value,
-        image: event.target.attributes[1].value, 
+        image: event.target.attributes[1].value,
         rating: newBookRating
       }
     })
@@ -145,111 +144,122 @@ class DisplayingData extends Component {
             <div className="breakLine"></div>
           </div>
 
-          <p>
-            Please input your selected title. You'll be presented with two
-            lists. Please select the matching titles from each lists.
-          </p>
+        <p className="instructions">
+          Did you ever wonder if the book or the movie told the
+          story better? So did we.
+        </p>
+        <p>
+          Pulling from online resources we hope to answer that
+          question here.
+        </p>
+        <p>Type in your title, and then follow the prompts.</p>
 
-          <form onSubmit={this.handleFormSubmit}>
-            <input
-              type="text"
-              value={this.state.userInput}
-              onChange={this.handleFormChange}
-              placeholder="Title"
-            />
-            <button type="submit" aria-label="Search" className="mButton">
-              Search
-            </button>
-          </form>
-
-          <ul className="movieUl">
+        <form onSubmit={this.handleFormSubmit}>
+          <input
+            type="text"
+            value={this.state.userInput}
+            onChange={this.handleFormChange}
+            placeholder="Title"
+            required
+          />
+          <button
+            type="submit"
+            aria-label="Search"
+            className="mButton">
+            Search
+          </button>
+        </form>
+          
+          
+     <div className="movies">
             <h3 id="movieList">Movie List</h3>
             {this.state.movieArray === undefined ? (
               <p>Sorry, no movies matched!</p>
             ) : (
               this.state.movieArray.slice([0], [5]).map((movie) => {
                 return (
-                  <li key={movie.id} className="movieLi">
+                  <>
                     <button
+                      key={movie.id}
                       onClick={this.handleTitleOption}
                       data-title={movie.title}
                       data-id={movie.id}
                       data-poster={movie.poster_path}
                       data-rating={movie.vote_average}
                       aria-labelledby="movieList"
+                      className="buttonChoices">
                     >
                       {movie.title}
                     </button>
-                  </li>
-                );
-              })
-            )}
-          </ul>
+                  </>
+                  </div>
 
-          <ul className="bookUl">
+        <div className="books">
             <h3 id="bookList">Book List</h3>
-            {this.state.bookArray === undefined ? (
-              <p>Sorry, no books matched!</p>
-            ) : (
-              this.state.bookArray.slice([0], [5]).map((book) => {
-                return (
-                  <li key={book.id._text} className="bookLi">
-                    <button
-                      onClick={this.handleTitleBookOption}
-                      data-title={book.best_book.title._text}
-                      data-value={book.best_book.title.text}
-                      data-image={book.best_book.image_url._text}
-                      data-rating={book.average_rating._text}
-                      aria-labelledby="bookList"
-                    >
-                      {book.best_book.title._text}
-                    </button>
-                  </li>
-                );
-              })
+          {this.state.bookArray === undefined ? (
+            <p>Sorry, no books matched!</p>
+          ) : (
+            this.state.bookArray.slice([0], [5]).map((book) => {
+              return (
+                <button
+                  key={book.id._text}
+                  onClick={this.handleTitleBookOption}
+                  data-title={book.best_book.title._text}
+                  data-value={book.best_book.title.text}
+                  data-image={book.best_book.image_url._text}
+                  data-rating={book.average_rating._text}
+                  aria-labelledby="bookList"
+                  className="buttonChoices">
+                    {book.best_book.title._text}
+                </button>
+              );
+            })
             )}
-          </ul>
+        </div>
 
-          <div className="moviePoster">
-            <h2>{this.state.movieInfo.title}</h2>
-            <div className="imgContainer">
-              {this.state.movieInfo.image === "no poster" ? (
-                <img
-                  src={"./Assets/movie.png"}
-                  alt={`A cartoon style movie clapperboard.`}
-                />
+        <div className="moviePoster">
+          <h2>{this.state.movieInfo.title}</h2>
+          <div className="imgContainer">
+            {this.state.movieInfo.image === "no poster" ? (
+              <img
+                className="icons"
+                src={"./Assets/movie.png"}
+                alt={`A cartoon style movie clapperboard.`}
+              />
               ) : (
                 <img
                   src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
                   alt={`Movie Poster of ${this.state.movieInfo.title}`}
                 />
               )}
-            </div>
-            <p>Rating: {this.state.movieInfo.rating}</p>
           </div>
+          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
+          {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Best rated</p> : "" }
+        </div>
 
-          <div className="bookCover">
-            <h2>{this.state.bookInfo.title}</h2>
+        <div className="bookCover">
+          <h2>{this.state.bookInfo.title}</h2>
             <div className="imgContainer">
               {this.state.bookInfo.image === undefined || "" ? (
-                <img
-                  src={"./Assets/book.png"}
-                  alt={`An cartoon style open book.`}
-                />
+                  <img
+                    className="icons"
+                    src={"./Assets/book.png"}
+                    alt={`An cartoon style open book.`}
+                  />
               ) : (
-                <img
-                  src={this.state.bookInfo.image}
-                  alt={`Book cover for ${this.state.bookInfo.title}`}
-                />
+                  <img
+                    src={this.state.bookInfo.image}
+                    alt={`Book cover for ${this.state.bookInfo.title}`}
+                  />
               )}
             </div>
-            <p>Rating: {this.state.bookInfo.rating}</p>
-          </div>
+            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
+            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Best rated</p> : ""}
         </div>
-      </main>
+      </div>
+    </main>
     );
   }
 }
 
 export default DisplayingData;
-
