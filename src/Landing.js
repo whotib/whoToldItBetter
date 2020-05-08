@@ -14,7 +14,7 @@ render(){
           <p>The movie or the book?</p>
         </div>
         <NavLink to="/data" className="hButton">
-          <button>continue</button>
+          <button className="landingButton">continue</button>
         </NavLink>
       </div>
     </header>

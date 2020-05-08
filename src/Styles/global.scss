@@ -33,6 +33,7 @@ h1 {
     font-family: $primaryFont;
     font-size: calc(2.3vw + 2.7rem);
     text-transform: uppercase;
+    margin-bottom:0;
 }
 .hContainer p {
     font-family: $secondaryFont;
@@ -67,16 +68,34 @@ main p{
     padding: 0;
 }
 
-// NOTE: list items are buttons !!
-button, 
+.landingButton:focus,
+.landingButton:hover{
+    // border:2px solid black;
+    letter-spacing: 2px;
+    padding:10px 25px 8px 25px;
+    transition: all 0.5s; 
+    border-radius: 0;  
+    background-color: rgba(0,0,0,0.8);
+    color:white;    
+}
+
+
+button,
 form{
     background-color: $secondaryColor;
     border: none;
     font-family: $secondaryFont;
     font-size: calc((.5vw + 1rem));
     text-transform: uppercase;
-    padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
+    // padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
 }
+
+button{
+    padding: 10px 19px 8px 19px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
 
 // Search-Main Page
 form {
@@ -85,40 +104,80 @@ form {
 main input {
     color: $primaryColor;
     text-align: center;
-    padding: 0 calc((.4vw + 1.1rem) * 1); //width of input
-    padding-top: calc((.4vw + 1.1rem) * .25);
+    padding: 8px;
 }
 .mButton{
     background-color: $primaryColor;
     color: $secondaryColor;
 }
+
+.mButton:hover,
+.mButton:focus{
+    background-color: black;
+}
+
 main button {
     font-size: calc((.3vw + 1.1rem));
     text-transform: capitalize;
     text-align: left;
 }
 
-// ************** Style list items here ******************
-
+// ************** movies and book choices styling ******************
 // GRIDS ...Lists of Books
-.movieUl,
-.bookUl{
-    grid-row: 9/10;
-    grid-column: 2/7;
+.movies,
+.books{
+    grid-column: 2/14;
     width: 100%;
     justify-content: center;
-    align-self: start;
     padding: 0 5%;
 }
-.bookUl{
+.books{
     grid-column: 7/12;
 }
 
-.movieLi,
-.bookLi  {
-    text-align: center;
-    display: inline; 
+.buttonChoices {
+    border: 1px $primaryColor solid;
+    margin:3px;
+    border-radius: 3px;
 }
 
 
-// credit for images the Noun Project, created by DinosoftLabs
+.buttonChoices:hover,
+.buttonChoices:focus{
+    -webkit-box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
+    -moz-box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
+    box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
+    letter-spacing: 1px;
+    transition: all 0.5s;
+}
+
+.winner{
+    font-size: 2rem;
+    font-weight: bold;
+    animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite,
+}
+
+@keyframes flicker {
+    0%{
+        color:black;
+    }
+    20% {
+        color: $primaryColor;
+    }   
+    40% {
+        color: black;
+    }
+    60% {
+        color: $primaryColor;
+    }
+    80% {
+        color: $primaryColor;
+    }
+    100% {
+        color: black;
+    }
+}
+
+
+
+// credit for Icons the Noun Project, created by DinosoftLabs
