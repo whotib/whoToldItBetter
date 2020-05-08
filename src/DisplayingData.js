@@ -34,8 +34,6 @@ class DisplayingData extends Component {
         include_adult: 'false',
       },
     }).then((response) => {
-
-      console.log(response.data.results)
       response.data.results.length > 0 ? (
         this.setState({
           movieArray: response.data.results,
@@ -188,10 +186,12 @@ class DisplayingData extends Component {
                       data-rating={movie.vote_average}
                       aria-labelledby="movieList"
                       className="buttonChoices">
-                    >
                       {movie.title}
                     </button>
-                  </>
+              </>
+                )}
+              )
+            )}
                   </div>
 
         <div className="books">
