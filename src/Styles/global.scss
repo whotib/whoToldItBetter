@@ -148,36 +148,45 @@ main button {
     -moz-box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
     box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
     letter-spacing: 1px;
-    transition: all 0.5s;
+    transition: all 0.9s;
 }
 
-.winner{
-    font-size: 2rem;
-    font-weight: bold;
-    animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite,
-}
+
 
 @keyframes flicker {
     0%{
-        color:black;
+        color:transparent;
     }
     20% {
-        color: $primaryColor;
+        color:#ff7600;
     }   
     40% {
-        color: black;
+        color: transparent;
     }
     60% {
-        color: $primaryColor;
+        color:#ff7600;
     }
     80% {
-        color: $primaryColor;
+        color:#ff7600;
     }
     100% {
-        color: black;
+        color: transparent;
     }
 }
 
 
+.selectedImg{
+    position:relative;
+}
+
+.winner{
+    position: relative;
+    top: -230px;
+    transform: rotate(-20deg);
+    font-size: 4.2rem;
+    font-weight: bold;
+    animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+    right: 8px; 
+}
 
 // credit for Icons the Noun Project, created by DinosoftLabs

@@ -276,6 +276,7 @@ h1 {
   font-family: "Maitree", serif;
   font-size: calc(2.3vw + 2.7rem);
   text-transform: uppercase;
+  margin-bottom: 0;
 }
 
 .hContainer p {
@@ -314,6 +315,17 @@ main p {
   padding: 0;
 }
 
+.landingButton:focus,
+.landingButton:hover {
+  letter-spacing: 2px;
+  padding: 10px 25px 8px 25px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  border-radius: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
 button,
 form {
   background-color: #f4e6e8;
@@ -321,7 +333,12 @@ form {
   font-family: "Montserrat", sans-serif;
   font-size: calc((.5vw + 1rem));
   text-transform: uppercase;
-  padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
+}
+
+button {
+  padding: 10px 19px 8px 19px;
+  border-radius: 2px;
+  cursor: pointer;
 }
 
 form {
@@ -333,13 +350,17 @@ form {
 main input {
   color: #81003c;
   text-align: center;
-  padding: 0 calc((.4vw + 1.1rem) * 1);
-  padding-top: calc((.4vw + 1.1rem) * .25);
+  padding: 8px;
 }
 
 .mButton {
   background-color: #81003c;
   color: #f4e6e8;
+}
+
+.mButton:hover,
+.mButton:focus {
+  background-color: black;
 }
 
 main button {
@@ -348,34 +369,97 @@ main button {
   text-align: left;
 }
 
-.movieUl,
-.bookUl {
-  -ms-grid-row: 9;
-  -ms-grid-row-span: 1;
-  grid-row: 9/10;
+.movies,
+.books {
   -ms-grid-column: 2;
-  -ms-grid-column-span: 5;
-  grid-column: 2/7;
+  -ms-grid-column-span: 12;
+  grid-column: 2/14;
   width: 100%;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -ms-flex-item-align: start;
-      -ms-grid-row-align: start;
-      align-self: start;
   padding: 0 5%;
 }
 
-.bookUl {
+.books {
   -ms-grid-column: 7;
   -ms-grid-column-span: 5;
   grid-column: 7/12;
 }
 
-.movieLi,
-.bookLi {
-  text-align: center;
-  display: inline;
+.buttonChoices {
+  border: 1px #81003c solid;
+  margin: 3px;
+  border-radius: 3px;
+}
+
+.buttonChoices:hover,
+.buttonChoices:focus {
+  -webkit-box-shadow: 2px 4px 6px 2px rgba(18, 18, 18, 0.26);
+  box-shadow: 2px 4px 6px 2px rgba(18, 18, 18, 0.26);
+  letter-spacing: 1px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.winner {
+  position: absolute;
+  font-size: 2rem;
+  font-weight: bold;
+  -webkit-animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+          animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+}
+
+@-webkit-keyframes flicker {
+  0% {
+    color: black;
+  }
+  20% {
+    color: #ff7600;
+  }
+  40% {
+    color: black;
+  }
+  60% {
+    color: #ff7600;
+  }
+  80% {
+    color: #ff7600;
+  }
+  100% {
+    color: black;
+  }
+}
+
+@keyframes flicker {
+  0% {
+    color: black;
+  }
+  20% {
+    color: #ff7600;
+  }
+  40% {
+    color: black;
+  }
+  60% {
+    color: #ff7600;
+  }
+  80% {
+    color: #ff7600;
+  }
+  100% {
+    color: black;
+  }
+}
+
+.imgContainer {
+  position: relative;
+}
+
+.selectedImg {
+  position: relative;
+  -webkit-box-shadow: 20px 20px 20px -4px rgba(255, 118, 0, 0.5);
+  box-shadow: 20px 20px 20px -4px rgba(255, 118, 0, 0.5);
 }
 
 header,
@@ -439,7 +523,6 @@ main .breakLine {
   -ms-grid-row-span: 1;
   grid-row: 6/ 7;
   width: 60%;
-  padding-top: 5%;
   margin: 0 auto;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
@@ -504,22 +587,10 @@ main .breakLine {
   text-align: center;
 }
 
-.movieUl,
-.bookUl {
+.books {
   -ms-grid-column: 2;
-  -ms-grid-column-span: 7;
-  grid-column: 2/9;
-}
-
-.bookUl {
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 10;
-  grid-column: 2/12;
-}
-
-.movieLi,
-.bookLi {
-  text-align: left;
+  -ms-grid-column-span: 12;
+  grid-column: 2/14;
 }
 
 .moviePoster,
@@ -537,6 +608,7 @@ main .breakLine {
 .moviePoster p,
 .bookCover p {
   margin: 0 auto;
+  padding-top: 2.3vh;
 }
 
 .moviePoster {
@@ -557,20 +629,16 @@ main .breakLine {
   margin: 1vh;
   -o-object-fit: cover;
      object-fit: cover;
+  margin: 0 auto;
 }
 
 img {
   height: 100%;
   width: 100%;
+  margin: 12px 0 12px 0;
 }
 
 .icons {
   height: 157px;
-}
-
-.buttonChoices {
-  border: 1px black solid;
-  margin: 3px;
-  border-radius: 2px;
 }
 /*# sourceMappingURL=App.css.map */
