@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/whoToldItBetter/static/css/main.054398e7.chunk.css",
+    "main.css": "/whoToldItBetter/static/css/main.b20d4091.chunk.css",
     "main.js": "/whoToldItBetter/static/js/main.add21b5a.chunk.js",
     "main.js.map": "/whoToldItBetter/static/js/main.add21b5a.chunk.js.map",
     "runtime-main.js": "/whoToldItBetter/static/js/runtime-main.8150cbcc.js",
@@ -8,15 +8,15 @@
     "static/js/2.681ac819.chunk.js": "/whoToldItBetter/static/js/2.681ac819.chunk.js",
     "static/js/2.681ac819.chunk.js.map": "/whoToldItBetter/static/js/2.681ac819.chunk.js.map",
     "index.html": "/whoToldItBetter/index.html",
-    "precache-manifest.b71129a0f1520fbb69b3e270fd4ec433.js": "/whoToldItBetter/precache-manifest.b71129a0f1520fbb69b3e270fd4ec433.js",
+    "precache-manifest.55aea15999a1c325affd0bef48bab846.js": "/whoToldItBetter/precache-manifest.55aea15999a1c325affd0bef48bab846.js",
     "service-worker.js": "/whoToldItBetter/service-worker.js",
-    "static/css/main.054398e7.chunk.css.map": "/whoToldItBetter/static/css/main.054398e7.chunk.css.map",
+    "static/css/main.b20d4091.chunk.css.map": "/whoToldItBetter/static/css/main.b20d4091.chunk.css.map",
     "static/js/2.681ac819.chunk.js.LICENSE.txt": "/whoToldItBetter/static/js/2.681ac819.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.8150cbcc.js",
     "static/js/2.681ac819.chunk.js",
-    "static/css/main.054398e7.chunk.css",
+    "static/css/main.b20d4091.chunk.css",
     "static/js/main.add21b5a.chunk.js"
   ]
 }
