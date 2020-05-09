@@ -51,7 +51,6 @@ main .breakLine {
     .lineWSubtitle {
       grid-row: 6/ 7;
       width: 60%;
-      // padding-top: 5%;
       margin: 0 auto;
       align-self: center;
     }
@@ -88,7 +87,7 @@ main .breakLine {
       width: 75%;
       padding: .3vh 0;
     }
-    // 
+
     // Search Field & Text
     form{
       grid-row: 6/ 7;
@@ -102,23 +101,19 @@ main .breakLine {
     }
 }
 
-  // Lists of Books
-  // .books{
-  //   grid-column: 2/14;
-  // }
-
-
   // Image Elements Primarily
   // MAIN Image components
   .moviePoster,
   .bookCover{
+    display: grid;
+    align-content: start;
     margin: 0 5%;
     padding: 0; 
-    // grid-row: 10 /12;
-    justify-content: center;   
+    justify-content: center;
+    justify-items: center;   
       p {
         margin: 0 auto;
-        padding-top:2.3vh;    
+        padding-top: 1vh;    
       }
   }
   .moviePoster{
@@ -129,29 +124,23 @@ main .breakLine {
   }
 
   .imgContainer{
-    // width: 200px;
-    // height: 300px;
     min-height: 160px;
     margin: 1vh;
     object-fit: cover;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
+    display:grid;
+
 
   }
+  
   img{
     height: 300px;
-    // width: 100%;
     margin: 12px 0 12px 0;
-
   }
 
   .icons{
     height: 157px;
   }
 
-
-// added
 .infoBox{ 
   margin-top: 4%;
   grid-row: 10/12;
@@ -160,7 +149,7 @@ main .breakLine {
   flex-wrap: wrap;
   justify-content:  center;
 }
-//added
+
 .list{
   width: 100%;
   display: flex;

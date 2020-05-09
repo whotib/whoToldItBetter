@@ -180,30 +180,28 @@ class DisplayingData extends Component {
           this.state.active ? 
         <>
           <div className="movies">
-            <div className="movies">
               <h3 id="movieList">Movie List</h3>
-                <div className="list">
-                  {this.state.movieArray === undefined ? (
-                    <p>Sorry, no movies matched!</p>
-                  ) : (
-                  this.state.movieArray.slice([0], [5]).map((movie) => {
-                    return (
-                      <>
-                        <button
-                          key={movie.id}
-                          onClick={this.handleTitleOption}
-                          data-title={movie.title}
-                          data-id={movie.id}
-                          data-poster={movie.poster_path}
-                          data-rating={movie.vote_average}
-                          data-release={movie.release_date}
-                          aria-labelledby="movieList"
-                          className="buttonChoices">
-                          {movie.title}
-                        </button>
-                      </>
-                    )}
-                  )
+
+            <div className="list">
+              {this.state.movieArray === undefined ? (
+                <p>Sorry, no movies matched!</p>
+              ) : (
+              this.state.movieArray.slice([0], [5]).map((movie) => {
+                return (
+                  <>
+                    <button
+                      key={movie.id}
+                      onClick={this.handleTitleOption}
+                      data-title={movie.title}
+                      data-id={movie.id}
+                      data-poster={movie.poster_path}
+                      data-rating={movie.vote_average}
+                      data-release={movie.release_date}
+                      aria-labelledby="movieList"
+                      className="buttonChoices">
+                      {movie.title}
+                    </button>
+                  </>
                 )}
               </div>
           </div>
@@ -255,9 +253,11 @@ class DisplayingData extends Component {
                   />
                 )}
             </div>
-            <h2>{this.state.movieInfo.title}</h2>
-            <p>{this.state.movieInfo.release}</p>
-            {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
+            <div className="moreDetail">  
+              <h2>{this.state.movieInfo.title}</h2>
+              <p>{this.state.movieInfo.release}</p>
+              {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
+            </div>
           </div>
 
           <div className="bookCover">
@@ -276,9 +276,12 @@ class DisplayingData extends Component {
                     />
                 )}
               </div>
-            <h2>{this.state.bookInfo.title}</h2>
-            <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
-            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
+              <div className="moreDetail">  
+                <h2>{this.state.bookInfo.title}</h2>
+                <p>{this.state.bookInfo.author} </p>
+                 <p>{this.state.bookInfo.release} </p>
+                {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
+              </div> 
           </div>
         </section>
       </div>
