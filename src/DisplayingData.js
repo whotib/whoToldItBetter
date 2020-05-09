@@ -160,7 +160,9 @@ class DisplayingData extends Component {
         <p>Type in your title, and then follow the prompts.</p>
 
         <form onSubmit={this.handleFormSubmit}>
+          
           <input
+            aria-label="Enter your story title"
             type="text"
             value={this.state.userInput}
             onChange={this.handleFormChange}
@@ -280,7 +282,7 @@ class DisplayingData extends Component {
               <div className="moreDetail">  
                 <h2>{this.state.bookInfo.title}</h2>
                 <p>{this.state.bookInfo.author} </p>
-                 <p>{this.state.bookInfo.release} </p>
+                <p>{this.state.bookInfo.release} </p>
                 {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
               </div> 
           </div>

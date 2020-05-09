@@ -23,6 +23,7 @@ a, main li{
     list-style: none;
 }
 
+
 // FONTS
 // Landing Page
 h1, .hContainer p { 
@@ -47,31 +48,29 @@ h1 {
 main h1{
     color: $secondaryColor;
     margin: 0;
-    padding:3% 5% 1% 5%;
+    padding: 2% 5% 0 5%;
 }
 h2{
-    font-size: calc(.1vw + 1.7rem);
-    color: $primaryColor;
-    padding: 4% 0 0 0;
+    padding: 0;
     margin: 0 auto;
     text-align: center;  
 }
 h3{
     font-family: $secondaryFont;
-    font-size: calc(.2vw + 1.6rem);
+    font-size: calc((2.6vw + 2.4rem) * .28);
     text-transform: capitalize;
-    margin: 2.5% 0 .5% 0;
 }
 main p{
     font-family: $secondaryFont;
-    font-size: calc(.2vw + 1.6rem);
+    font-size: calc((2.6vw + 2.4rem) * .28);
     text-align: left;
-    margin: .05%;
+    margin: 0;
     padding: 0;
 }
 
 .landingButton:focus,
 .landingButton:hover{
+    // border:2px solid black;
     letter-spacing: 2px;
     padding:10px 25px 8px 25px;
     transition: all 0.5s; 
@@ -86,8 +85,9 @@ form{
     background-color: $secondaryColor;
     border: none;
     font-family: $secondaryFont;
-    font-size: calc((.2vw + 1.6rem));
+    font-size: calc((.5vw + 1rem));
     text-transform: uppercase;
+    // padding: calc((.4vw + 1.1rem) * .2) calc((.4vw + 1.1rem) * 1);
 }
 
 button{
@@ -104,13 +104,11 @@ form {
 main input {
     color: $primaryColor;
     text-align: center;
-    padding: 7px;
+    padding: 8px;
 }
 .mButton{
     background-color: $primaryColor;
     color: $secondaryColor;
-    font-size: calc((.1vw + 1.6rem));
-    
 }
 
 .mButton:hover,
@@ -119,75 +117,68 @@ main input {
 }
 
 main button {
-    font-size: calc((.1vw + 1.6rem));
+    font-size: calc((.3vw + 1.1rem));
     text-transform: capitalize;
     text-align: left;
 }
 
+// ************** movies and book choices styling ******************
 // GRIDS ...Lists of Books
 .movies,
 .books{
-    grid-column: 2/12;
+    grid-column: 2/14;
+    width: 100%;
+    justify-content: center;
+    padding: 0 5%;
+}
+.books{
+    grid-column: 7/12;
 }
 
 .buttonChoices {
-    border: 1px  #81003c58 solid;
+    border: 1px $primaryColor solid;
     margin:3px;
     border-radius: 3px;
-    display: inline;
 }
+
+
 .buttonChoices:hover,
 .buttonChoices:focus{
     -webkit-box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
     -moz-box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
     box-shadow: 2px 4px 6px 2px rgba(18,18,18,0.26);
     letter-spacing: 1px;
-    transition: all 0.9s;
-}
-
-.moreDetail { 
-    width: 280px;
-    text-align: center;
-    margin:-4% 0 11% 0;
-}
-
-
-@keyframes flicker {
-    0%{
-        color:transparent;
-    }
-    20% {
-        color:#ff7600;
-        -webkit-text-stroke: .5px black;
-    }   
-    40% {
-        color: transparent
-    }
-    60% {
-        color:#ff7600;
-        -webkit-text-stroke: .5px black;
-    }
-    80% {
-        color:#ff7600;
-        -webkit-text-stroke: .5px black;
-    }
-    100% {
-        color: transparent;
-    }
-}
-
-.selectedImg{
-    position: relative;
+    transition: all 0.5s;
 }
 
 .winner{
-    position: relative;
-    top: -300px;
-    transform: rotate(-20deg);
-    font-size: 4.2rem;
+    font-size: 2rem;
     font-weight: bold;
     animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
-    font-family: 'Russo One', sans-serif;
+    font-family: 'Alfa Slab One', cursive;
 }
+
+@keyframes flicker {
+    0%{
+        color:black;
+    }
+    20% {
+        color: $primaryColor;
+    }   
+    40% {
+        color: black;
+    }
+    60% {
+        color: $primaryColor;
+    }
+    80% {
+        color: $primaryColor;
+    }
+    100% {
+        color: black;
+    }
+}
+
+
 
 // credit for Icons the Noun Project, created by DinosoftLabs

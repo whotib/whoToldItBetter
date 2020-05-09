@@ -292,26 +292,29 @@ h1 {
 main h1 {
   color: #f4e6e8;
   margin: 0;
-  padding: 2% 5% 0 5%;
+  padding: 3% 5% 1% 5%;
 }
 
 h2 {
-  padding: 0;
+  font-size: calc(.1vw + 1.7rem);
+  color: #81003c;
+  padding: 4% 0 0 0;
   margin: 0 auto;
   text-align: center;
 }
 
 h3 {
   font-family: "Montserrat", sans-serif;
-  font-size: calc((2.6vw + 2.4rem) * .28);
+  font-size: calc(.2vw + 1.6rem);
   text-transform: capitalize;
+  margin: 2.5% 0 .5% 0;
 }
 
 main p {
   font-family: "Montserrat", sans-serif;
-  font-size: calc((2.6vw + 2.4rem) * .28);
+  font-size: calc(.2vw + 1.6rem);
   text-align: left;
-  margin: 0;
+  margin: .05%;
   padding: 0;
 }
 
@@ -331,7 +334,7 @@ form {
   background-color: #f4e6e8;
   border: none;
   font-family: "Montserrat", sans-serif;
-  font-size: calc((.5vw + 1rem));
+  font-size: calc((.2vw + 1.6rem));
   text-transform: uppercase;
 }
 
@@ -350,12 +353,13 @@ form {
 main input {
   color: #81003c;
   text-align: center;
-  padding: 8px;
+  padding: 7px;
 }
 
 .mButton {
   background-color: #81003c;
   color: #f4e6e8;
+  font-size: calc((.1vw + 1.6rem));
 }
 
 .mButton:hover,
@@ -364,7 +368,7 @@ main input {
 }
 
 main button {
-  font-size: calc((.3vw + 1.1rem));
+  font-size: calc((.1vw + 1.6rem));
   text-transform: capitalize;
   text-align: left;
 }
@@ -372,25 +376,15 @@ main button {
 .movies,
 .books {
   -ms-grid-column: 2;
-  -ms-grid-column-span: 12;
-  grid-column: 2/14;
-  width: 100%;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  padding: 0 5%;
-}
-
-.books {
-  -ms-grid-column: 7;
-  -ms-grid-column-span: 5;
-  grid-column: 7/12;
+  -ms-grid-column-span: 10;
+  grid-column: 2/12;
 }
 
 .buttonChoices {
-  border: 1px #81003c solid;
+  border: 1px  #81003c58 solid;
   margin: 3px;
   border-radius: 3px;
+  display: inline;
 }
 
 .buttonChoices:hover,
@@ -398,68 +392,78 @@ main button {
   -webkit-box-shadow: 2px 4px 6px 2px rgba(18, 18, 18, 0.26);
   box-shadow: 2px 4px 6px 2px rgba(18, 18, 18, 0.26);
   letter-spacing: 1px;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+  -webkit-transition: all 0.9s;
+  transition: all 0.9s;
 }
 
-.winner {
-  position: absolute;
-  font-size: 2rem;
-  font-weight: bold;
-  -webkit-animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
-          animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+.moreDetail {
+  width: 280px;
+  text-align: center;
+  margin: -4% 0 11% 0;
 }
 
 @-webkit-keyframes flicker {
   0% {
-    color: black;
+    color: transparent;
   }
   20% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   40% {
-    color: black;
+    color: transparent;
   }
   60% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   80% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   100% {
-    color: black;
+    color: transparent;
   }
 }
 
 @keyframes flicker {
   0% {
-    color: black;
+    color: transparent;
   }
   20% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   40% {
-    color: black;
+    color: transparent;
   }
   60% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   80% {
     color: #ff7600;
+    -webkit-text-stroke: .5px black;
   }
   100% {
-    color: black;
+    color: transparent;
   }
-}
-
-.imgContainer {
-  position: relative;
 }
 
 .selectedImg {
   position: relative;
-  -webkit-box-shadow: 20px 20px 20px -4px rgba(255, 118, 0, 0.5);
-  box-shadow: 20px 20px 20px -4px rgba(255, 118, 0, 0.5);
+}
+
+.winner {
+  position: relative;
+  top: -300px;
+  -webkit-transform: rotate(-20deg);
+          transform: rotate(-20deg);
+  font-size: 4.2rem;
+  font-weight: bold;
+  -webkit-animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+          animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
+  font-family: 'Russo One', sans-serif;
 }
 
 header,
@@ -585,30 +589,31 @@ main .breakLine {
   -ms-grid-row-span: 2;
   grid-row: 7/9;
   text-align: center;
-}
-
-.books {
-  -ms-grid-column: 2;
-  -ms-grid-column-span: 12;
-  grid-column: 2/14;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: start;
+      align-content: start;
 }
 
 .moviePoster,
 .bookCover {
-  margin: 10%;
+  display: -ms-grid;
+  display: grid;
+  -ms-flex-line-pack: start;
+      align-content: start;
+  margin: 0 5%;
   padding: 0;
-  -ms-grid-row: 10;
-  -ms-grid-row-span: 2;
-  grid-row: 10 /12;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  justify-items: center;
 }
 
 .moviePoster p,
 .bookCover p {
   margin: 0 auto;
-  padding-top: 2.3vh;
+  padding-top: 1vh;
 }
 
 .moviePoster {
@@ -624,21 +629,48 @@ main .breakLine {
 }
 
 .imgContainer {
-  width: 200px;
-  height: 300px;
+  min-height: 160px;
   margin: 1vh;
   -o-object-fit: cover;
      object-fit: cover;
-  margin: 0 auto;
+  display: -ms-grid;
+  display: grid;
 }
 
 img {
-  height: 100%;
-  width: 100%;
+  height: 300px;
   margin: 12px 0 12px 0;
 }
 
 .icons {
   height: 157px;
+}
+
+.infoBox {
+  margin-top: 4%;
+  -ms-grid-row: 10;
+  -ms-grid-row-span: 2;
+  grid-row: 10/12;
+  grid-column: 1 / -1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.list {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 /*# sourceMappingURL=App.css.map */
