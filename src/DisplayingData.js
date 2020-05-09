@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Qs from "qs";
 import convert from 'xml-js'
-import { number } from 'prop-types';
 
 
 class DisplayingData extends Component {
@@ -236,8 +235,7 @@ class DisplayingData extends Component {
 
 
         <div className="moviePoster">
-          <h2>{this.state.movieInfo.title}</h2>
-          <p>{this.state.movieInfo.release}</p>
+          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
           <div className="imgContainer">
             {this.state.movieInfo.image === "no poster" ? (
               <img
@@ -252,13 +250,13 @@ class DisplayingData extends Component {
                 />
               )}
           </div>
-          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
+          <h2>{this.state.movieInfo.title}</h2>
+          <p>{this.state.movieInfo.release}</p>
           {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
         </div>
 
         <div className="bookCover">
-          <h2>{this.state.bookInfo.title}</h2>
-          <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
+            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
             <div className="imgContainer">
               {this.state.bookInfo.image === undefined || "" ? (
                   <img
@@ -273,8 +271,9 @@ class DisplayingData extends Component {
                   />
               )}
             </div>
-            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
-            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
+          <h2>{this.state.bookInfo.title}</h2>
+          <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
+          {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
         </div>
       </div>
     </main>
