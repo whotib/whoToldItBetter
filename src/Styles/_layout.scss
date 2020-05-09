@@ -135,6 +135,8 @@ main .breakLine {
     margin: 1vh;
     object-fit: cover;
     margin: 0 auto;
+    display: flex;
+    justify-content: center;
 
   }
   img{
