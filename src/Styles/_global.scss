@@ -51,8 +51,8 @@ main h1{
     padding: 2% 5% 0 5%;
 }
 h2{
-    padding: 0;
-    margin: 30 auto;
+    padding: 15% 0 0 0;
+    margin: 0 auto;
     text-align: center;  
 }
 h3{
@@ -126,19 +126,18 @@ main button {
 // GRIDS ...Lists of Books
 .movies,
 .books{
-    grid-column: 2/14;
-    width: 100%;
-    justify-content: center;
-    padding: 0 5%;
+    grid-column: 2/12;
+    // width: 100%;
+    // justify-content: center;
+    // padding: 0 5%;
 }
-.books{
-    grid-column: 7/12;
-}
+
 
 .buttonChoices {
     border: 1px $primaryColor solid;
     margin:3px;
     border-radius: 3px;
+    display: inline;
 }
 
 

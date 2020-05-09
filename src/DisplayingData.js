@@ -179,102 +179,106 @@ class DisplayingData extends Component {
         {
           this.state.active ? 
         <>
-        <div className="movies">
-          <h3 id="movieList">Movie List</h3>
-          {this.state.movieArray === undefined ? (
-            <p>Sorry, no movies matched!</p>
-          ) : (
-            this.state.movieArray.slice([0], [5]).map((movie) => {
-              return (
-                <>
-                  <button
-                    key={movie.id}
-                    onClick={this.handleTitleOption}
-                    data-title={movie.title}
-                    data-id={movie.id}
-                    data-poster={movie.poster_path}
-                    data-rating={movie.vote_average}
-                    data-release={movie.release_date}
-                    aria-labelledby="movieList"
-                    className="buttonChoices">
-                    {movie.title}
-                  </button>
-                </>
-              )}
-            )
-          )}
+          <div className="movies">
+            <div className="movies">
+              <h3 id="movieList">Movie List</h3>
+              {this.state.movieArray === undefined ? (
+                <p>Sorry, no movies matched!</p>
+              ) : (
+              this.state.movieArray.slice([0], [5]).map((movie) => {
+                return (
+                  <>
+                    <button
+                      key={movie.id}
+                      onClick={this.handleTitleOption}
+                      data-title={movie.title}
+                      data-id={movie.id}
+                      data-poster={movie.poster_path}
+                      data-rating={movie.vote_average}
+                      data-release={movie.release_date}
+                      aria-labelledby="movieList"
+                      className="buttonChoices">
+                      {movie.title}
+                    </button>
+                  </>
+                )}
+              )
+            )}
+          </div>
         </div>
 
         <div className="books">
-            <h3 id="bookList">Book List</h3>
-          {this.state.bookArray === undefined ? (
-            <p>Sorry, no books matched!</p>
-          ) : (
-            this.state.bookArray.slice([0], [5]).map((book) => {
-              return (
-                <button
-                  key={book.id._text}
-                  onClick={this.handleTitleBookOption}
-                  data-title={book.best_book.title._text}
-                  data-value={book.best_book.title.text}
-                  data-image={book.best_book.image_url._text}
-                  data-rating={book.average_rating._text}
-                  data-author={book.best_book.author.name._text}
-                  data-release={book.original_publication_year._text}
-                  aria-labelledby="bookList"
-                  className="buttonChoices">
-                    {book.best_book.title._text}
-                </button>
-              );
-            })
+          <h3 id="bookList">Book List</h3>
+          <div className="list">
+            {this.state.bookArray === undefined ? (
+              <p>Sorry, no books matched!</p>
+            ) : (
+              this.state.bookArray.slice([0], [5]).map((book) => {
+                return (
+                  <button
+                    key={book.id._text}
+                    onClick={this.handleTitleBookOption}
+                    data-title={book.best_book.title._text}
+                    data-value={book.best_book.title.text}
+                    data-image={book.best_book.image_url._text}
+                    data-rating={book.average_rating._text}
+                    data-author={book.best_book.author.name._text}
+                    data-release={book.original_publication_year._text}
+                    aria-labelledby="bookList"
+                    className="buttonChoices">
+                      {book.best_book.title._text}
+                  </button>
+                );
+              })
             )}
-        </div>
-          
+          </div>
+        </div> 
         </>
         : null  }
 
-
-        <div className="moviePoster">
-          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
-          <div className="imgContainer">
-            {this.state.movieInfo.image === "no poster" ? (
-              <img
-                className="icons"
-                src={"./Assets/movie.png"}
-                alt={`A cartoon style movie clapperboard.`}
-              />
-              ) : (
-                  <img className={this.state.movieInfo.rating > this.state.bookInfo.rating ? "selectedImg" : null}
-                  src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
-                  alt={`Movie Poster of ${this.state.movieInfo.title}`}
-                />
-              )}
-          </div>
-          <h2>{this.state.movieInfo.title}</h2>
-          <p>{this.state.movieInfo.release}</p>
-          {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
-        </div>
-
-        <div className="bookCover">
-            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
+        <section className="infoBox wrapper">
+          <div className="moviePoster">
+            {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
             <div className="imgContainer">
-              {this.state.bookInfo.image === undefined || "" ? (
-                  <img
-                    className="icons"
-                    src={"./Assets/book.png"}
-                    alt={`An cartoon style open book.`}
+              {this.state.movieInfo.image === "no poster" ? (
+                <img
+                  className="icons"
+                  src={"./Assets/movie.png"}
+                  alt={`A cartoon style movie clapperboard.`}
+                />
+                ) : (
+                    <img className={this.state.movieInfo.rating > this.state.bookInfo.rating ? "selectedImg" : null}
+                    src={`http://image.tmdb.org/t/p/w500/${this.state.movieInfo.image}`}
+                    alt={`Movie Poster of ${this.state.movieInfo.title}`}
                   />
-              ) : (
-                  <img className={this.state.movieInfo.rating < this.state.bookInfo.rating ? "selectedImg" : null }
-                    src={this.state.bookInfo.image}
-                    alt={`Book cover for ${this.state.bookInfo.title}`}
-                  />
-              )}
+                )}
             </div>
-          <h2>{this.state.bookInfo.title}</h2>
-          <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
-          {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
-        </div>
+            <h2>{this.state.movieInfo.title}</h2>
+            <p>{this.state.movieInfo.release}</p>
+            {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
+          </div>
+
+          <div className="bookCover">
+              {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
+              <div className="imgContainer">
+                {this.state.bookInfo.image === undefined || "" ? (
+                    <img
+                      className="icons"
+                      src={"./Assets/book.png"}
+                      alt={`An cartoon style open book.`}
+                    />
+                ) : (
+                    <img className={this.state.movieInfo.rating < this.state.bookInfo.rating ? "selectedImg" : null }
+                      src={this.state.bookInfo.image}
+                      alt={`Book cover for ${this.state.bookInfo.title}`}
+                    />
+                )}
+              </div>
+            <h2>{this.state.bookInfo.title}</h2>
+            <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
+            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
+          </div>
+        </section>
       </div>
     </main>
     );
