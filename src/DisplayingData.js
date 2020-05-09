@@ -203,9 +203,10 @@ class DisplayingData extends Component {
                     </button>
                   </>
                 )}
+              )
+              )}
               </div>
           </div>
-        </div>
 
         <div className="books">
           <h3 id="bookList">Book List</h3>
