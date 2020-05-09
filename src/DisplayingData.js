@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Qs from "qs";
 import convert from 'xml-js'
-import { number } from 'prop-types';
 
 
 class DisplayingData extends Component {
@@ -102,21 +101,24 @@ class DisplayingData extends Component {
 
   handleTitleOption = (event) => {
     let movieRating = event.target.attributes[3].value * 10
+    let movieYear = new Date(event.target.attributes["data-release"].value).getFullYear()
     if (event.target.attributes[2].name === "data-poster") {
       this.setState({
         movieInfo: {
           title: event.target.attributes[0].value,
           id: event.target.attributes[1].value,
           image: event.target.attributes[2].value,
-          rating: movieRating
-        }
-      })
+          release: movieYear,
+          rating: movieRating,
+        },
+      });
     } else {
       this.setState({
         movieInfo: {
           title: event.target.attributes[0].value,
           id: event.target.attributes[1].value,
           image: "no poster",
+          release: movieYear,
           rating: event.target.attributes[2].value * 10
         }
       })
@@ -131,10 +133,11 @@ class DisplayingData extends Component {
       bookInfo: {
         title: event.target.attributes[0].value,
         image: event.target.attributes[1].value,
-        rating: newBookRating
+        rating: newBookRating,
+        author: event.target.attributes[3].value,
+        release: event.target.attributes[4].value
       }
     })
-
   }
 
   render() {
@@ -191,6 +194,7 @@ class DisplayingData extends Component {
                     data-id={movie.id}
                     data-poster={movie.poster_path}
                     data-rating={movie.vote_average}
+                    data-release={movie.release_date}
                     aria-labelledby="movieList"
                     className="buttonChoices">
                     {movie.title}
@@ -215,6 +219,8 @@ class DisplayingData extends Component {
                   data-value={book.best_book.title.text}
                   data-image={book.best_book.image_url._text}
                   data-rating={book.average_rating._text}
+                  data-author={book.best_book.author.name._text}
+                  data-release={book.original_publication_year._text}
                   aria-labelledby="bookList"
                   className="buttonChoices">
                     {book.best_book.title._text}
@@ -229,7 +235,7 @@ class DisplayingData extends Component {
 
 
         <div className="moviePoster">
-          <h2>{this.state.movieInfo.title}</h2>
+          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
           <div className="imgContainer">
             {this.state.movieInfo.image === "no poster" ? (
               <img
@@ -244,12 +250,13 @@ class DisplayingData extends Component {
                 />
               )}
           </div>
-          {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
+          <h2>{this.state.movieInfo.title}</h2>
+          <p>{this.state.movieInfo.release}</p>
           {this.state.movieInfo.rating > this.state.bookInfo.rating ? <p className="winner">Winner!</p> : "" }
         </div>
 
         <div className="bookCover">
-          <h2>{this.state.bookInfo.title}</h2>
+            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
             <div className="imgContainer">
               {this.state.bookInfo.image === undefined || "" ? (
                   <img
@@ -264,8 +271,9 @@ class DisplayingData extends Component {
                   />
               )}
             </div>
-            {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
-            {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
+          <h2>{this.state.bookInfo.title}</h2>
+          <p>{this.state.bookInfo.author} {this.state.bookInfo.release} </p>
+          {this.state.movieInfo.rating < this.state.bookInfo.rating ? <p className="winner"> Winner! </p> : ""}
         </div>
       </div>
     </main>
