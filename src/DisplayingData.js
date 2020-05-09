@@ -181,6 +181,7 @@ class DisplayingData extends Component {
         <>
           <div className="movies">
               <h3 id="movieList">Movie List</h3>
+
             <div className="list">
               {this.state.movieArray === undefined ? (
                 <p>Sorry, no movies matched!</p>
@@ -202,8 +203,7 @@ class DisplayingData extends Component {
                     </button>
                   </>
                 )}
-              )
-            )}
+              </div>
           </div>
         </div>
 
