@@ -255,6 +255,7 @@ body {
   font-family: "Maitree", serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 }
 
 .wrapper {
@@ -266,6 +267,7 @@ body {
 a, main li {
   text-decoration: none;
   list-style: none;
+  color: black;
 }
 
 h1, .hContainer p {
@@ -402,6 +404,10 @@ main button {
   margin: -4% 0 11% 0;
 }
 
+.rating {
+  font-weight: bold;
+}
+
 @-webkit-keyframes flicker {
   0% {
     color: transparent;
@@ -464,6 +470,25 @@ main button {
   -webkit-animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
           animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
   font-family: 'Russo One', sans-serif;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 100%;
+  opacity: .5;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+footer p {
+  margin: 10px;
 }
 
 header,
@@ -626,6 +651,8 @@ main .breakLine {
   -ms-grid-column: 7;
   -ms-grid-column-span: 5;
   grid-column: 7 / 12;
+  margin-bottom: 20px;
+  font-size: calc(.2vw + 1.2rem);
 }
 
 .imgContainer {

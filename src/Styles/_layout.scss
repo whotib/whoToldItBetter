@@ -121,6 +121,8 @@ main .breakLine {
   }
   .bookCover{
     grid-column: 7 / 12;
+    margin-bottom:20px;
+    font-size: calc(.2vw + 1.2rem);
   }
 
   .imgContainer{

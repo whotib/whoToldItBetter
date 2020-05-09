@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Qs from "qs";
 import convert from 'xml-js'
+import Footer from './Footer';
 
 
 class DisplayingData extends Component {
@@ -241,7 +242,7 @@ class DisplayingData extends Component {
 
         <section className="infoBox wrapper">
           <div className="moviePoster">
-            {this.state.bookInfo.image ? <p>Rating: {this.state.movieInfo.rating}</p> : ""}
+            {this.state.bookInfo.image ? <p className="rating">Rating: {this.state.movieInfo.rating}</p> : ""}
             <div className="imgContainer">
               {this.state.movieInfo.image === "no poster" ? (
                 <img
@@ -264,7 +265,7 @@ class DisplayingData extends Component {
           </div>
 
           <div className="bookCover">
-              {this.state.bookInfo.image ? <p>Rating: {this.state.bookInfo.rating}</p> : ""}
+              {this.state.bookInfo.image ? <p className="rating">Rating: {this.state.bookInfo.rating}</p> : ""}
               <div className="imgContainer">
                 {this.state.bookInfo.image === undefined || "" ? (
                     <img
@@ -288,6 +289,7 @@ class DisplayingData extends Component {
           </div>
         </section>
       </div>
+        <Footer />
     </main>
     );
   }

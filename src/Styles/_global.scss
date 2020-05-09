@@ -4,11 +4,13 @@ html {
     scroll-behavior: smooth;
 }
 
+
 body {
     min-height: 100%;
     font-family: $primaryFont;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    position: relative;
 }
 
 .wrapper {
@@ -21,6 +23,7 @@ body {
 a, main li{
     text-decoration: none;
     list-style: none;
+    color: black;
 }
 
 // FONTS
@@ -151,6 +154,10 @@ main button {
     margin:-4% 0 11% 0;
 }
 
+.rating{
+    font-weight: bold;
+}
+
 
 @keyframes flicker {
     0%{
@@ -189,5 +196,20 @@ main button {
     animation: flicker 1s cubic-bezier(0.19, 1, 0.22, 1) infinite;
     font-family: 'Russo One', sans-serif;
 }
+
+footer{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    opacity: .5;
+    flex-wrap: wrap;
+}
+
+footer p {
+    margin: 10px;
+}
+
 
 // credit for Icons the Noun Project, created by DinosoftLabs
